@@ -16,7 +16,7 @@ The fastest way to get started is using [Docker Compose](https://docs.docker.com
 | QC-Atlas |<http://localhost:8080/atlas> | [Link](https://github.com/UST-QuAntiL/qc-atlas) | [Link](https://hub.docker.com/r/planqk/atlas) |
 | Postgres DB | <http://localhost:5432> | [Link](https://github.com/docker-library/postgres) | [Link](https://hub.docker.com/_/postgres) |
 
-**Make sure following ports in your environment are free in order to start the PlanQK platform properly:**
+**Make sure following ports in your environment are free in order to start the QuAntiL environment properly:**
 
 * `8080`
 * `5432`
