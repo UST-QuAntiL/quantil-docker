@@ -9,8 +9,8 @@ services:
       POSTGRES_USERS: 'planqk:planqk|nisq:nisq|patternpedia:patternpedia'
       # specifies db name for each container
       POSTGRES_DATABASES: 'planqk:planqk|nisq:nisq|patternpedia:patternpedia'
-    volumes:
-      # use this line to save the postgres data
+    #volumes:
+      # use this volume to save the postgres data
       # - ./postgres-data:/var/lib/postgresql/data
     ports:
       - '5432:5432'
