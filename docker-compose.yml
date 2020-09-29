@@ -17,9 +17,7 @@ services:
     networks:
       - default
   qc-atlas-ui:
-    build: 
-      context: ../qc-atlas-ui
-    image: atlas-ui:latest
+    image: planqk/qc-atlas-ui
     environment:
       # because the requests are performed from the browser and not
       # from the container itself we have to specify localhost here 
@@ -35,7 +33,7 @@ services:
     networks:
       - default
   qc-atlas:
-    image: planqk/atlas
+    image: planqk/atlas:develop
     environment:
       POSTGRES_HOSTNAME: db
       POSTGRES_PORT: 5432
