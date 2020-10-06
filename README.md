@@ -49,6 +49,11 @@ docker-compose logs -f [--tail=1 <SERVICE_NAME>...]
 docker-compose logs -f qc-atlas db
 ```
 
+### Import Example Data
+
+To import example data from the [qc-atlas-content](https://github.com/UST-QuAntiL/planqk-atlas-content) and [nisq-analyzer-content](https://github.com/UST-QuAntiL/nisq-analyzer-content) repository use the [\_docker-compose.override.yml](docker-compose.override.yml) file. It is required that the data directory is empty before starting the container to prevent the deletion of data, see [postgres-docker documentation](https://github.com/docker-library/docs/tree/master/postgres#initialization-scripts).
+Furthermore, to clone [qc-atlas-content](https://github.com/UST-QuAntiL/planqk-atlas-content) a ssh private key file is needed for authentication purposes, it has to be called `ssh_secret` and is contained in the root folder of this repository.
+
 ## Haftungsausschluss
 
 Dies ist ein Forschungsprototyp.
