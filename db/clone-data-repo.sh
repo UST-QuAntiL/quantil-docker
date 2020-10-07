@@ -26,6 +26,15 @@ if test -f "$FILE"; then
     else
         echo "unable to find specified directory with example data for nisq-analyzer in the repository"
     fi
+
+     # clone repo, if successful copy setup script to /docker-entrypoint-initdb.d/
+    git clone ${PATTERNATLAS_CONTENT_REPOSITORY_URL} ${PATTERNATLAS_CONTENT_REPOSITORY_PATH}
+    if [ -d "${PATTERNATLAS_CONTENT_REPOSITORY_PATH}/${PATTERNATLAS_SUBFOLDER_CONTENT_BACKUP_FILES}" ]; then
+        cp setup-patternatlas.sh /docker-entrypoint-initdb.d/
+        echo "pattern-atlas-content repo was cloned successfully"
+    else
+        echo "unable to find specified directory with example data for pattern-atlas in the repository"
+    fi
 else
     echo "ssh key not present, proceeding with empty db"
 fi
