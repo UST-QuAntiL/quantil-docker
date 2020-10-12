@@ -51,8 +51,12 @@ docker-compose logs -f qc-atlas db
 
 ### Import Example Data
 
-To import example data from the [qc-atlas-content](https://github.com/UST-QuAntiL/planqk-atlas-content) and [nisq-analyzer-content](https://github.com/UST-QuAntiL/nisq-analyzer-content) repository use the [\_docker-compose.override.yml](docker-compose.override.yml) file. It is required that the data directory is empty before starting the container to prevent the deletion of data, see [postgres-docker documentation](https://github.com/docker-library/docs/tree/master/postgres#initialization-scripts).
-Furthermore, to clone [qc-atlas-content](https://github.com/UST-QuAntiL/planqk-atlas-content) a ssh private key file is needed for authentication purposes, it has to be called `ssh_secret` and is contained in the root folder of this repository.
+Data from the [pattern-atlas-content](https://github.com/PatternAtlas/pattern-atlas-content) repository will always be imported automatically.
+However, to import example data from the [qc-atlas-content](https://github.com/UST-QuAntiL/planqk-atlas-content) and [nisq-analyzer-content](https://github.com/UST-QuAntiL/nisq-analyzer-content) repositories make sure to follow these steps:
+
+1. Rename the [\_docker-compose.override.yml](_docker-compose.override.yml) file to `docker-compose.override.yml`.
+2. Provide a ssh private key file with correct access rights for the [qc-atlas-content](https://github.com/UST-QuAntiL/planqk-atlas-content) repository. The file has to be called `ssh_secret` and is located in the root folder of this repository
+3. It is required that the data directory is empty before starting the container to prevent the deletion of data, see [postgres-docker documentation](https://github.com/docker-library/docs/tree/master/postgres#initialization-scripts).
 
 ## Haftungsausschluss
 

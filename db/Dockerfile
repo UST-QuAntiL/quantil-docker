@@ -8,7 +8,7 @@ ENV QC_ATLAS_SUBFOLDER_CONTENT_BACKUP_FILES "example-data/SQL/backup-files"
 ENV NISQ_CONTENT_REPOSITORY_URL "git@github.com:UST-QuAntiL/nisq-analyzer-content.git"
 ENV NISQ_CONTENT_REPOSITORY_PATH "/var/nisq/testdata"
 ENV NISQ_SUBFOLDER_CONTENT_BACKUP_FILES "example-data/SQL/backup-files"
-ENV PATTERNATLAS_CONTENT_REPOSITORY_URL "git@github.com:PatternAtlas/pattern-atlas-content.git"
+ENV PATTERNATLAS_CONTENT_REPOSITORY_URL "https://github.com/PatternAtlas/pattern-atlas-content.git"
 ENV PATTERNATLAS_CONTENT_REPOSITORY_PATH "/var/patternatlas/testdata"
 ENV PATTERNATLAS_SUBFOLDER_CONTENT_BACKUP_FILES "db-backup-files"
 ENV JDBC_DATABASE_PORT 5432
