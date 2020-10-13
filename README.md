@@ -14,16 +14,18 @@ The fastest way to get started is using [Docker Compose](https://docs.docker.com
 | QuAntiL Component | URL | GitHub | Docker Hub |
 |:------------------- |:--- |:------ |:---------- |
 | QC-Atlas |<http://localhost:8080/atlas> | [Link](https://github.com/UST-QuAntiL/qc-atlas) | [Link](https://hub.docker.com/r/planqk/atlas) |
-| Postgres-Multi DB | <http://localhost:5432> | [Link](https://github.com/lmm-git/docker-postgres-multi) | [Link](https://hub.docker.com/r/lmmdock/postgres-multi) |
+| Postgres-Multi DB | <localhost:5432> | [Link](https://github.com/lmm-git/docker-postgres-multi) | [Link](https://hub.docker.com/r/lmmdock/postgres-multi) |
 | QC-Atlas-UI |<http://localhost:4200> | [Link](https://github.com/UST-QuAntiL/qc-atlas-ui) | [Link](https://hub.docker.com/r/planqk/qc-atlas-ui) |
 | Pattern-Atlas-API |<http://localhost:8082/patternpedia> | [Link](https://github.com/PatternAtlas/pattern-atlas-api) | [Link](https://hub.docker.com/r/patternpedia/patternrepo-api) |
 | NISQ-Analyzer |<http://localhost:8081/nisq-analyzer> | [Link](https://github.com/UST-QuAntiL/nisq-analyzer) | [Link](https://hub.docker.com/r/planqk/nisq-analyzer) |
 | Qiskit-Service |<http://localhost:5000> | [Link](https://github.com/UST-QuAntiL/qiskit-service) | [Link](https://hub.docker.com/r/planqk/qiskit-service) |
-| Redis |<http://localhost:6379> | [Link](https://github.com/redis/redis) | [Link](https://hub.docker.com/_/redis) |
+| Redis |<localhost:6379> | [Link](https://github.com/redis/redis) | [Link](https://hub.docker.com/_/redis) |
+| Latex-Renderer |<http://localhost:8083> | [Link](https://github.com/UST-QuAntiL/latex-renderer) | [Link](https://hub.docker.com/r/beiselmn/latex-renderer) |
+
 
 **Make sure following ports in your environment are free in order to start the QuAntiL environment properly:**
 
-* `8080`-`8082`
+* `8080`-`8083`
 * `5432`
 * `5000`
 * `4200`
