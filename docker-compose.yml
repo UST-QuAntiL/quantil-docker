@@ -82,7 +82,8 @@ services:
   # used by qc-atlas-ui to render latex
   latex-renderer:
     image: beiselmn/latex-renderer:0.1
-    ports: "8083:8082"
+    ports:
+      - "8083:8082"
   # used by nisq analyzer for execution and transpilation
   qiskit-service:
     image: planqk/qiskit-service:latest
