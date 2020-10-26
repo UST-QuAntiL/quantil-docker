@@ -17,7 +17,7 @@ if test -f "$FILE"; then
 
         # even though this repo is actually public the data heavily depends on the data of qc-atlas
         # therefore it is only loaded if the atlas repo was sucessfully cloned
-        git ${NISQ_CONTENT_REPOSITORY_URL} ${NISQ_CONTENT_REPOSITORY_PATH}
+        git clone ${NISQ_CONTENT_REPOSITORY_URL} ${NISQ_CONTENT_REPOSITORY_PATH}
         if [ -d "${NISQ_CONTENT_REPOSITORY_PATH}/${NISQ_SUBFOLDER_CONTENT_BACKUP_FILES}" ]; then
             cp setup-nisq.sh /docker-entrypoint-initdb.d/
             echo "nisq-analyzer-content repo was cloned successfully"
