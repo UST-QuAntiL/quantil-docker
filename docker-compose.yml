@@ -31,7 +31,7 @@ services:
       # and **not** the container name
       QC_ATLAS_HOST_NAME: localhost
       QC_ATLAS_PORT: 8080
-      PATTERN_ATLAS_HOST_NAME: test
+      PATTERN_ATLAS_HOST_NAME: localhost
       PATTERN_ATLAS_PORT: 8082
       NISQ_ANALYZER_HOST_NAME: localhost
       NISQ_ANALYZER_PORT: 8081
