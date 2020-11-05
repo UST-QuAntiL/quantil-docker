@@ -40,7 +40,7 @@ services:
     networks:
       - default
   qc-atlas:
-    image: planqk/atlas:develop
+    image: planqk/atlas:v1.1.0
     environment:
       POSTGRES_HOSTNAME: db
       POSTGRES_PORT: 5432
