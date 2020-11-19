@@ -10,12 +10,13 @@ services:
     image: quantil-db
     environment:
       # specifies user:pw for each container
-      POSTGRES_USERS: 'planqk:planqk|nisq:nisq|patternpedia:patternpedia'
+      POSTGRES_USERS: 'planqk:planqk|nisq:nisq|patternpedia:patternpedia|qprov:qprov'
       # specifies db name for each container
-      POSTGRES_DATABASES: 'planqk:planqk|nisq:nisq|patternpedia:patternpedia'
+      POSTGRES_DATABASES: 'planqk:planqk|nisq:nisq|patternpedia:patternpedia|qprov:qprov'
       ATLAS_DB: planqk
       NISQ_DB: nisq
       PATTERNPEDIA_DB: patternpedia
+      QPROV_DB: qprov
     #volumes:
       # use this volume to save the postgres data
       # - ./postgres-data:/var/lib/postgresql/data
@@ -35,6 +36,8 @@ services:
       PATTERN_ATLAS_PORT: 8082
       NISQ_ANALYZER_HOST_NAME: localhost
       NISQ_ANALYZER_PORT: 8081
+      QPROV_HOST_NAME: localhost
+      QPROV_PORT: 1337
     ports:
       - '80:80'
     networks:
@@ -116,6 +119,19 @@ services:
       - "6379:6379"
     networks:
       - default
+  # qantum provenance
+  qprov-collector:
+    image: benleb/qprov-collector:0.0.1-SNAPSHOT
+    ports: ['7331:7331']
+    networks: [default]
+    environment: {QPROV_DB_HOST: db}
+    depends_on: [db]
+  qprov-api:
+    image: "benleb/qprov-api:0.0.1-SNAPSHOT"
+    ports: ['1337:1337']
+    networks: [default]
+    environment: {QPROV_DB_HOST: db}
+    depends_on: [db]
 networks:
   default:
     driver: bridge
