@@ -65,7 +65,7 @@ services:
     networks:
       - default
   nisq-analyzer:
-    image: planqk/nisq-analyzer:v1.0
+    image: planqk/nisq-analyzer:v1.0.0
     environment:
       POSTGRES_HOSTNAME: db
       POSTGRES_PORT: 5432
@@ -86,7 +86,7 @@ services:
       - "8083:8082"
   # used by nisq analyzer for execution and transpilation
   qiskit-service:
-    image: planqk/qiskit-service:v1.0
+    image: planqk/qiskit-service:v1.0.0
     command: sh /app/startup.sh
     ports:
       - "5000:5000"
@@ -98,7 +98,7 @@ services:
     networks:
       - default
   qiskit-rq-worker:
-    image: planqk/qiskit-service:v1.0
+    image: planqk/qiskit-service:v1.0.0
     command: rq worker --url redis://redis qiskit-service_execute
     environment:
       - REDIS_URL=redis://redis
