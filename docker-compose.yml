@@ -1,4 +1,4 @@
-version: '3.6'
+version: "3.6"
 volumes:
   exec_data:
 services:
@@ -10,18 +10,18 @@ services:
     image: quantil-db
     environment:
       # specifies user:pw for each container
-      POSTGRES_USERS: 'planqk:planqk|nisq:nisq|patternpedia:patternpedia|qprov:qprov'
+      POSTGRES_USERS: "planqk:planqk|nisq:nisq|patternpedia:patternpedia|qprov:qprov"
       # specifies db name for each container
-      POSTGRES_DATABASES: 'planqk:planqk|nisq:nisq|patternpedia:patternpedia|qprov:qprov'
+      POSTGRES_DATABASES: "planqk:planqk|nisq:nisq|patternpedia:patternpedia|qprov:qprov"
       ATLAS_DB: planqk
       NISQ_DB: nisq
       PATTERNPEDIA_DB: patternpedia
       QPROV_DB: qprov
     #volumes:
-      # use this volume to save the postgres data
-      # - ./postgres-data:/var/lib/postgresql/data
+    # use this volume to save the postgres data
+    # - ./postgres-data:/var/lib/postgresql/data
     ports:
-      - '5432:5432'
+      - "5432:5432"
     networks:
       - default
   qc-atlas-ui:
@@ -39,7 +39,7 @@ services:
       QPROV_HOST_NAME: localhost
       QPROV_PORT: 1337
     ports:
-      - '80:80'
+      - "80:80"
     networks:
       - default
   qc-atlas:
@@ -64,7 +64,7 @@ services:
       JDBC_DATABASE_PORT: 5432
       API_PORT: 8080
     ports:
-      - '8082:8080'
+      - "8082:8080"
     networks:
       - default
   nisq-analyzer:
@@ -79,7 +79,7 @@ services:
       NISQ_PORT: 5000
       NISQ_VERSION: v1.0
     ports:
-      - '8081:8080'
+      - "8081:8080"
     networks:
       - default
   # used by qc-atlas-ui to render latex
@@ -122,13 +122,13 @@ services:
   # qantum provenance
   qprov-collector:
     image: benleb/qprov-collector:0.0.1-SNAPSHOT
-    ports: ['7331:7331']
+    ports: ["7331:7331"]
     networks: [default]
     environment: {QPROV_DB_HOST: db}
     depends_on: [db]
   qprov-api:
     image: "benleb/qprov-api:0.0.1-SNAPSHOT"
-    ports: ['1337:1337']
+    ports: ["1337:1337"]
     networks: [default]
     environment: {QPROV_DB_HOST: db}
     depends_on: [db]
