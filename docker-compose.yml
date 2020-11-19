@@ -127,7 +127,7 @@ services:
     environment: {QPROV_DB_HOST: db}
     depends_on: [db]
   qprov-api:
-    image: "benleb/qprov-api:0.0.1-SNAPSHOT"
+    image: benleb/qprov-api:0.0.1-SNAPSHOT
     ports: ["1337:1337"]
     networks: [default]
     environment: {QPROV_DB_HOST: db}
