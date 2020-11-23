@@ -24,7 +24,7 @@ services:
     networks:
       - default
   qc-atlas-ui:
-    image: planqk/qc-atlas-ui:v1.0.0
+    image: planqk/qc-atlas-ui:latest
     environment:
       # because the requests are performed from the browser and not
       # from the container itself we have to specify localhost here
