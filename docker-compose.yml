@@ -24,7 +24,7 @@ services:
     networks:
       - default
   qc-atlas-ui:
-    image: planqk/qc-atlas-ui:latest
+    image: planqk/qc-atlas-ui:v1.0.0
     environment:
       # because the requests are performed from the browser and not
       # from the container itself we have to specify localhost here
@@ -52,7 +52,7 @@ services:
     networks:
       - default
   pattern-atlas-api:
-    image: patternpedia/patternrepo-api:latest
+    image: patternpedia/patternrepo-api:v1.0.2
     environment:
       JDBC_DATABASE_URL: db
       JDBC_DATABASE_NAME: patternpedia
@@ -65,7 +65,7 @@ services:
     networks:
       - default
   nisq-analyzer:
-    image: planqk/nisq-analyzer:latest
+    image: planqk/nisq-analyzer:v1.0.0
     environment:
       POSTGRES_HOSTNAME: db
       POSTGRES_PORT: 5432
@@ -81,12 +81,12 @@ services:
       - default
   # used by qc-atlas-ui to render latex
   latex-renderer:
-    image: beiselmn/latex-renderer:0.1
+    image: planqk/latex-renderer:v1.0.1
     ports:
       - "8083:8082"
   # used by nisq analyzer for execution and transpilation
   qiskit-service:
-    image: planqk/qiskit-service:latest
+    image: planqk/qiskit-service:v1.0.0
     command: sh /app/startup.sh
     ports:
       - "5000:5000"
@@ -98,7 +98,7 @@ services:
     networks:
       - default
   qiskit-rq-worker:
-    image: planqk/qiskit-service:latest
+    image: planqk/qiskit-service:v1.0.0
     command: rq worker --url redis://redis qiskit-service_execute
     environment:
       - REDIS_URL=redis://redis
