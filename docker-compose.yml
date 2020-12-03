@@ -10,12 +10,13 @@ services:
     image: quantil-db
     environment:
       # specifies user:pw for each container
-      POSTGRES_USERS: 'planqk:planqk|nisq:nisq|patternpedia:patternpedia'
+      POSTGRES_USERS: 'planqk:planqk|nisq:nisq|patternpedia:patternpedia|qprov:qprov'
       # specifies db name for each container
-      POSTGRES_DATABASES: 'planqk:planqk|nisq:nisq|patternpedia:patternpedia'
+      POSTGRES_DATABASES: 'planqk:planqk|nisq:nisq|patternpedia:patternpedia|qprov:qprov'
       ATLAS_DB: planqk
       NISQ_DB: nisq
       PATTERNPEDIA_DB: patternpedia
+      QPROV_DB: qprov
     #volumes:
       # use this volume to save the postgres data
       # - ./postgres-data:/var/lib/postgresql/data
@@ -114,6 +115,37 @@ services:
     image: redis:latest
     ports:
       - "6379:6379"
+    networks:
+      - default
+  qprov:
+    image: planqk/qprov:latest
+    environment:
+      POSTGRES_HOSTNAME: db
+      POSTGRES_PORT: 5432
+      POSTGRES_USER: qprov
+      POSTGRES_PASSWORD: qprov
+      POSTGRES_DB: qprov
+    ports:
+      - "8084:8080"
+    networks:
+      - default  
+  qprov-collector-ibm:
+    image: planqk/qprov-collector:latest
+    environment:
+      POSTGRES_HOSTNAME: db
+      POSTGRES_PORT: 5432
+      POSTGRES_USER: qprov
+      POSTGRES_PASSWORD: qprov
+      POSTGRES_DB: qprov
+      QPROV_IBMQ_TOKEN: ''
+      QPROV_IBMQ_EXECUTE_CIRCUITS: 'false'
+      QPROV_IBMQ_AUTO_COLLECT: 'false'
+      QPROV_IBMQ_AUTO_COLLECT_INTERVAL: 60
+      QPROV_IBMQ_AUTO_COLLECT_INTERVAL_CIRCUITS: 180
+      QISKIT_SERVICE_HOSTNAME: qiskit-service
+      QISKIT_SERVICE_PORT: 5000
+    ports:
+      - "8085:8080"
     networks:
       - default
 networks:
