@@ -118,7 +118,7 @@ services:
     networks:
       - default
   qprov:
-    image: planqk/qprov:1.0.0
+    image: planqk/qprov:v1.0.0
     environment:
       POSTGRES_HOSTNAME: db
       POSTGRES_PORT: 5432
