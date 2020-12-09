@@ -99,7 +99,7 @@ services:
     networks:
       - default
   qiskit-rq-worker:
-    image: planqk/qiskit-service:v1.0.0
+    image: planqk/qiskit-service:v1.1.0
     command: rq worker --url redis://redis qiskit-service_execute
     environment:
       - REDIS_URL=redis://redis
