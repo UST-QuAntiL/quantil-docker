@@ -42,6 +42,8 @@ services:
       QPROV_PORT: 8084
     ports:
       - '80:80'
+    volumes:
+      - ./config:/opt/init-config.d
     networks:
       - default
   qc-atlas:
@@ -156,6 +158,7 @@ services:
     image: quay.io/coreos/etcd:latest
     environment:
       ETCD_NAME: config-node1
+      ETCD_CORS: "*"
       ETCD_ADVERTISE_CLIENT_URLS: "http://config-server:2379"
       ETCD_LISTEN_CLIENT_URLS: "http://0.0.0.0:2379"
       ETCDCTL_API: 3
