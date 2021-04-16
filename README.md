@@ -51,7 +51,7 @@ For running multiple feature sets, e.g. two sets, run:
 | Rigetti Quilc |<http://localhost:5667> | [Link](https://github.com/rigetti/quilc) | [Link](https://hub.docker.com/r/rigetti/quilc) |
 | QProv |<http://localhost:8084/qprov> | [Link](https://github.com/UST-QuAntiL/qprov) | [Link](https://hub.docker.com/r/planqk/qprov) |
 | QProv-Collector-IBM |<http://localhost:8085> | [Link](https://github.com/UST-QuAntiL/qprov) | [Link](https://hub.docker.com/r/planqk/qprov-collector) |
-
+| Config-Server |<http://localhost:2379> | [Link](https://github.com/etcd-io/etcd) | [Link](https://quay.io/repository/coreos/etcd) |
 
 **Make sure following ports in your environment are free in order to start the QuAntiL environment properly:**
 
@@ -61,6 +61,7 @@ For running multiple feature sets, e.g. two sets, run:
 * `5000`-`5003
 * `80`
 * `6379`
+* `2379`
 
 ### Tips and Tricks
 
