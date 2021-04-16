@@ -91,7 +91,6 @@ services:
       TRANSLATOR_HOSTNAME: quantum-transpiler
       TRANSLATOR_PORT: 5000
 
-
       # Configuration of the SDK Connector Services
       QISKIT_HOSTNAME: qiskit-service
       QISKIT_PORT: 5000
