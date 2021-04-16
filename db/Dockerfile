@@ -17,7 +17,7 @@ ENV PATTERNATLAS_SUBFOLDER_CONTENT_BACKUP_FILES "db-backup-files"
 ENV JDBC_DATABASE_PORT 5432
 
 # install git
-RUN apt -o Acquire::Check-Valid-Until=false -o Acquire::Check-Date=false update -qq && apt-get install -qqy \
+RUN apt-get update -qq && apt-get install -qqy \
   git \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
