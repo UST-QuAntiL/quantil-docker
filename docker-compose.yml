@@ -25,7 +25,7 @@ services:
     networks:
       - default
   qc-atlas-ui:
-    image: planqk/qc-atlas-ui:v1.0.0
+    image: planqk/qc-atlas-ui:latest
     depends_on:
       - config-server
     environment:
@@ -59,7 +59,7 @@ services:
     networks:
       - default
   pattern-atlas-api:
-    image: patternpedia/patternrepo-api:v1.0.2
+    image: patternpedia/patternrepo-api:latest
     environment:
       JDBC_DATABASE_URL: db
       JDBC_DATABASE_NAME: patternpedia
@@ -72,7 +72,7 @@ services:
     networks:
       - default
   nisq-analyzer:
-    image: planqk/nisq-analyzer:v1.0.0
+    image: planqk/nisq-analyzer:latest
     environment:
       POSTGRES_HOSTNAME: db
       POSTGRES_PORT: 5432
@@ -123,7 +123,7 @@ services:
 
   # used by nisq analyzer for execution and transpilation
   qiskit-service:
-    image: planqk/qiskit-service:v1.1.0
+    image: planqk/qiskit-service:latest
     command: sh /app/startup.sh
     ports:
       - "5003:5000"
@@ -136,7 +136,7 @@ services:
       - default
 
   qiskit-rq-worker:
-    image: planqk/qiskit-service:v1.1.0
+    image: planqk/qiskit-service:latest
     command: rq worker --url redis://redis qiskit-service_execute
     environment:
       - REDIS_URL=redis://redis
