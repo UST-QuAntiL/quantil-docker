@@ -60,6 +60,7 @@ services:
       - default
   pattern-atlas-api:
     image: patternpedia/patternrepo-api:latest
+    profiles: ["all", "patternAtlas"]
     environment:
       JDBC_DATABASE_URL: db
       JDBC_DATABASE_NAME: patternpedia
@@ -73,6 +74,7 @@ services:
       - default
   nisq-analyzer:
     image: planqk/nisq-analyzer:latest
+    profiles: ["all", "nisqAnalyzer", "nisqAnalyzerCompilerComparison"]
     environment:
       POSTGRES_HOSTNAME: db
       POSTGRES_PORT: 5432
@@ -109,6 +111,7 @@ services:
 
   quantum-transpiler:
     image: planqk/quantum-transpiler-backend:latest
+    profiles: ["all", "nisqAnalyzerCompilerComparison"]
     ports:
      - '5000:5000'
     networks:
@@ -116,6 +119,7 @@ services:
 
   quantum-transpiler-frontend:
     image: planqk/quantum-transpiler-frontend:latest
+    profiles: ["all", "nisqAnalyzerCompilerComparison"]
     ports:
      - '8086:80'
     networks:
@@ -124,6 +128,7 @@ services:
   # used by nisq analyzer for execution and transpilation
   qiskit-service:
     image: planqk/qiskit-service:latest
+    profiles: ["all", "nisqAnalyzer", "nisqAnalyzerCompilerComparison", "qprov"]
     command: sh /app/startup.sh
     ports:
       - "5003:5000"
@@ -137,6 +142,7 @@ services:
 
   qiskit-rq-worker:
     image: planqk/qiskit-service:latest
+    profiles: ["all", "nisqAnalyzer", "nisqAnalyzerCompilerComparison", "qprov"]
     command: rq worker --url redis://redis qiskit-service_execute
     environment:
       - REDIS_URL=redis://redis
@@ -148,6 +154,7 @@ services:
 
   forest-service:
     image: planqk/forest-service:latest
+    profiles: ["all", "nisqAnalyzerCompilerComparison"]
     command: sh /app/startup.sh
     ports:
       - "5002:5000"
@@ -165,6 +172,7 @@ services:
 
   forest-rq-worker:
     image: planqk/forest-service:latest
+    profiles: ["all", "nisqAnalyzerCompilerComparison"]
     command: rq worker --url redis://redis forest-service_execute
     environment:
       - REDIS_URL=redis://redis
@@ -182,6 +190,7 @@ services:
 
   pytket-service:
     image: planqk/pytket-service:latest
+    profiles: ["all", "nisqAnalyzerCompilerComparison"]
     command: sh /app/startup.sh
     ports:
       - "5001:5000"
@@ -197,6 +206,7 @@ services:
 
   pytket-rq-worker:
     image: planqk/pytket-service:latest
+    profiles: ["all", "nisqAnalyzerCompilerComparison"]
     command: rq worker --url redis://redis pytket-service_execute
     environment:
       - REDIS_URL=redis://redis
@@ -212,6 +222,7 @@ services:
 
   rigetti-qvm:
     image: rigetti/qvm
+    profiles: ["all", "nisqAnalyzerCompilerComparison"]
     ports:
       - "5666:5666"
     command: -S -p 5666
@@ -220,6 +231,7 @@ services:
 
   rigetti-quilc:
     image: rigetti/quilc
+    profiles: ["all", "nisqAnalyzerCompilerComparison"]
     ports:
       - "5667:5667"
     command: -S -p 5667
@@ -228,12 +240,14 @@ services:
   # redis server for qiskit service
   redis:
     image: redis:latest
+    profiles: ["all", "nisqAnalyzer", "nisqAnalyzerCompilerComparison", "qprov"]
     ports:
       - "6379:6379"
     networks:
       - default
   qprov:
     image: planqk/qprov:latest
+    profiles: ["all", "nisqAnalyzer", "nisqAnalyzerCompilerComparison", "qprov"]
     environment:
       POSTGRES_HOSTNAME: db
       POSTGRES_PORT: 5432
@@ -246,6 +260,7 @@ services:
       - default
   qprov-collector-ibm:
     image: planqk/qprov-collector:latest
+    profiles: ["all", "nisqAnalyzer", "nisqAnalyzerCompilerComparison", "qprov"]
     environment:
       POSTGRES_HOSTNAME: db
       POSTGRES_PORT: 5432
