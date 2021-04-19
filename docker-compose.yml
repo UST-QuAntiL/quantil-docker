@@ -150,6 +150,8 @@ services:
       - exec_data:/data
     depends_on:
       - redis
+    deploy:
+      replicas: 1
 
   forest-service:
     image: planqk/forest-service:latest
