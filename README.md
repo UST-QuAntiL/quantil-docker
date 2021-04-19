@@ -2,24 +2,28 @@
 
 # Dockerized QuAntiL Environment
 
-Docker Compose file for running the entire QuAntiL environment.
+Docker Compose file for running the entire QuAntiL environment provided by the [QC Atlas UI](https://github.com/UST-QuAntiL/qc-atlas-ui).  
+Thereby, the [QC Atlas](https://github.com/UST-QuAntiL/qc-atlas) builds the basic knowledge base.  
+Furthermore, different features, e.g. [NISQ Analyzer](https://github.com/UST-QuAntiL/nisq-analyzer), [Pattern Atlas](https://github.com/PatternAtlas/pattern-atlas-api), and [QProv](https://github.com/UST-QuAntiL/qprov), are supported on top of the QC Atlas.  
+These features and their related backend components are defined as feature sets.  
+
+The defined feature sets are namely:  
+- `all` (runs all features)
+- `nisqAnalyzer`
+- `nisqAnalyzerCompilerComparison`
+- `patternAtlas`
+- `qprov`
+
+A detailed documentation can be found [here](https://quantil.readthedocs.io/en/latest/).  
 
 The fastest way to get started is using [Docker Compose](https://docs.docker.com/compose/).  
-[Profiles](https://docs.docker.com/compose/profiles/) are used to run different feature sets.  
 
-Defined feature sets are:  
-- all (starts all components)
-- nisqAnalyzer
-- nisqAnalyzerCompilerComparison
-- patternAtlas
-- qprov
-
-QC Atlas, QC Atlas UI, LaTeX Renderer, and the databases run by default using:
+The base components QC Atlas, QC Atlas UI, LaTeX Renderer, and the databases without any of the named features run by default using:
   ```shell
   docker-compose pull
   docker-compose up
   ```
-
+For running certain feature sets on top of the base components, [Profiles](https://docs.docker.com/compose/profiles/) are used.  
 To start a certain feature set run:
   ```shell
   docker-compose --profile <name-of-feature-set> pull
@@ -31,6 +35,8 @@ For running multiple feature sets, e.g. two sets, run:
   docker-compose --profile <name-of-feature-set-1> --profile <name-of-feature-set-2> pull
   docker-compose --profile <name-of-feature-set-1> --profile <name-of-feature-set-2> up
   ```
+  
+For running all feature sets, choose `--profile all`.
 
 
 | QuAntiL Component | URL | GitHub | Docker Hub |
@@ -58,7 +64,7 @@ For running multiple feature sets, e.g. two sets, run:
 * `8080`-`8086`
 * `5432`
 * `5666`-`5667`
-* `5000`-`5003
+* `5000`-`5003`
 * `80`
 * `6379`
 * `2379`
