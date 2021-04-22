@@ -4,6 +4,6 @@
     "qprov": "true",
     "patternAtlas": "true",
     "nisqAnalyzerCompilerComparison": "true",
-    "showSettings": "false"
+    "showSettings": "true"
   }
 }
