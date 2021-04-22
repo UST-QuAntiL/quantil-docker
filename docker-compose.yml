@@ -26,6 +26,8 @@ services:
       - default
   qc-atlas-ui:
     image: planqk/qc-atlas-ui:latest
+    depends_on:
+      - config-server
     environment:
       # because the requests are performed from the browser and not
       # from the container itself we have to specify localhost here
@@ -36,8 +38,12 @@ services:
       PATTERN_ATLAS_PORT: 8082
       NISQ_ANALYZER_HOST_NAME: localhost
       NISQ_ANALYZER_PORT: 8081
+      QPROV_HOST_NAME: localhost
+      QPROV_PORT: 8084
     ports:
       - '80:80'
+    volumes:
+      - ./config:/opt/init-config.d
     networks:
       - default
   qc-atlas:
@@ -54,6 +60,7 @@ services:
       - default
   pattern-atlas-api:
     image: patternpedia/patternrepo-api:latest
+    profiles: ["all", "patternAtlas"]
     environment:
       JDBC_DATABASE_URL: db
       JDBC_DATABASE_NAME: patternpedia
@@ -67,15 +74,30 @@ services:
       - default
   nisq-analyzer:
     image: planqk/nisq-analyzer:latest
+    profiles: ["all", "nisqAnalyzer", "nisqAnalyzerCompilerComparison"]
     environment:
       POSTGRES_HOSTNAME: db
       POSTGRES_PORT: 5432
       POSTGRES_USER: nisq
       POSTGRES_PASSWORD: nisq
       POSTGRES_DB: nisq
-      NISQ_HOSTNAME: qiskit-service
-      NISQ_PORT: 5000
-      NISQ_VERSION: v1.0
+
+      # activate correct application properties
+      SPRING_PROFILES_ACTIVE: docker
+
+      # Configure QPROV connection
+      QPROV_HOSTNAME: qprov
+      QPROV_PORT: 8080
+      TRANSLATOR_HOSTNAME: quantum-transpiler
+      TRANSLATOR_PORT: 5000
+
+      # Configuration of the SDK Connector Services
+      QISKIT_HOSTNAME: qiskit-service
+      QISKIT_PORT: 5000
+      PYTKET_HOSTNAME: pytket-service
+      PYTKET_PORT: 5000
+      FOREST_HOSTNAME: forest-service
+      FOREST_PORT: 5000
     ports:
       - '8081:8080'
     networks:
@@ -85,12 +107,30 @@ services:
     image: planqk/latex-renderer:latest
     ports:
       - "8083:8082"
+
+  quantum-transpiler:
+    image: planqk/quantum-transpiler-backend:latest
+    profiles: ["all", "nisqAnalyzerCompilerComparison"]
+    ports:
+     - '5000:5000'
+    networks:
+     - default
+
+  quantum-transpiler-frontend:
+    image: planqk/quantum-transpiler-frontend:latest
+    profiles: ["all", "nisqAnalyzerCompilerComparison"]
+    ports:
+     - '8086:80'
+    networks:
+     - default
+
   # used by nisq analyzer for execution and transpilation
   qiskit-service:
     image: planqk/qiskit-service:latest
+    profiles: ["all", "nisqAnalyzer", "nisqAnalyzerCompilerComparison", "qprov"]
     command: sh /app/startup.sh
     ports:
-      - "5000:5000"
+      - "5003:5000"
     environment:
       - REDIS_URL=redis://redis
       - DATABASE_URL=sqlite:////data/app.db
@@ -98,8 +138,10 @@ services:
       - exec_data:/data
     networks:
       - default
+
   qiskit-rq-worker:
     image: planqk/qiskit-service:latest
+    profiles: ["all", "nisqAnalyzer", "nisqAnalyzerCompilerComparison", "qprov"]
     command: rq worker --url redis://redis qiskit-service_execute
     environment:
       - REDIS_URL=redis://redis
@@ -109,16 +151,104 @@ services:
     depends_on:
       - redis
     deploy:
-      replicas: 4
+      replicas: 1
+
+  forest-service:
+    image: planqk/forest-service:latest
+    profiles: ["all", "nisqAnalyzerCompilerComparison"]
+    command: sh /app/startup.sh
+    ports:
+      - "5002:5000"
+    environment:
+      - REDIS_URL=redis://redis
+      - DATABASE_URL=sqlite:////data/app.db
+      - QVM_HOSTNAME=rigetti-qvm
+      - QVM_PORT=5666
+      - QUILC_HOSTNAME=rigetti-quilc
+      - QUILC_PORT=5667
+    volumes:
+      - exec_data:/data
+    networks:
+      - default
+
+  forest-rq-worker:
+    image: planqk/forest-service:latest
+    profiles: ["all", "nisqAnalyzerCompilerComparison"]
+    command: rq worker --url redis://redis forest-service_execute
+    environment:
+      - REDIS_URL=redis://redis
+      - DATABASE_URL=sqlite:////data/app.db
+      - QVM_HOSTNAME=rigetti-qvm
+      - QVM_PORT=5666
+      - QUILC_HOSTNAME=rigetti-quilc
+      - QUILC_PORT=5667
+    volumes:
+      - exec_data:/data
+    depends_on:
+      - redis
+    networks:
+      - default
+
+  pytket-service:
+    image: planqk/pytket-service:latest
+    profiles: ["all", "nisqAnalyzerCompilerComparison"]
+    command: sh /app/startup.sh
+    ports:
+      - "5001:5000"
+    environment:
+      - REDIS_URL=redis://redis
+      - DATABASE_URL=sqlite:////data/app.db
+      - QVM_HOSTNAME=rigetti-qvm
+      - QVM_PORT=5666
+    volumes:
+      - exec_data:/data
+    networks:
+      - default
+
+  pytket-rq-worker:
+    image: planqk/pytket-service:latest
+    profiles: ["all", "nisqAnalyzerCompilerComparison"]
+    command: rq worker --url redis://redis pytket-service_execute
+    environment:
+      - REDIS_URL=redis://redis
+      - DATABASE_URL=sqlite:////data/app.db
+      - QVM_HOSTNAME=rigetti-qvm
+      - QVM_PORT=5666
+    volumes:
+      - exec_data:/data
+    depends_on:
+      - redis
+    networks:
+      - default
+
+  rigetti-qvm:
+    image: rigetti/qvm
+    profiles: ["all", "nisqAnalyzerCompilerComparison"]
+    ports:
+      - "5666:5666"
+    command: -S -p 5666
+    networks:
+      - default
+
+  rigetti-quilc:
+    image: rigetti/quilc
+    profiles: ["all", "nisqAnalyzerCompilerComparison"]
+    ports:
+      - "5667:5667"
+    command: -S -p 5667
+    networks:
+      - default
   # redis server for qiskit service
   redis:
     image: redis:latest
+    profiles: ["all", "nisqAnalyzer", "nisqAnalyzerCompilerComparison", "qprov"]
     ports:
       - "6379:6379"
     networks:
       - default
   qprov:
     image: planqk/qprov:latest
+    profiles: ["all", "nisqAnalyzer", "nisqAnalyzerCompilerComparison", "qprov"]
     environment:
       POSTGRES_HOSTNAME: db
       POSTGRES_PORT: 5432
@@ -131,6 +261,7 @@ services:
       - default
   qprov-collector-ibm:
     image: planqk/qprov-collector:latest
+    profiles: ["all", "nisqAnalyzer", "nisqAnalyzerCompilerComparison", "qprov"]
     environment:
       POSTGRES_HOSTNAME: db
       POSTGRES_PORT: 5432
@@ -146,6 +277,18 @@ services:
       QISKIT_SERVICE_PORT: 5000
     ports:
       - "8085:8080"
+    networks:
+      - default
+  config-server:
+    image: quay.io/coreos/etcd:latest
+    environment:
+      ETCD_NAME: config-node1
+      ETCD_CORS: "*"
+      ETCD_ADVERTISE_CLIENT_URLS: "http://config-server:2379"
+      ETCD_LISTEN_CLIENT_URLS: "http://0.0.0.0:2379"
+      ETCDCTL_API: 3
+    ports:
+      - "2379:2379"
     networks:
       - default
 networks:
