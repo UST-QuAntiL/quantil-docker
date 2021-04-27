@@ -59,7 +59,7 @@ services:
     networks:
       - default
   pattern-atlas-api:
-    image: patternpedia/patternrepo-api:v1.0.2
+    image: patternpedia/patternrepo-api:v1.0.5
     profiles: ["all", "patternAtlas"]
     environment:
       JDBC_DATABASE_URL: db
