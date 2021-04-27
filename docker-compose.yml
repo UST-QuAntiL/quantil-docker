@@ -25,7 +25,7 @@ services:
     networks:
       - default
   qc-atlas-ui:
-    image: planqk/qc-atlas-ui:latest
+    image: planqk/qc-atlas-ui:v1.1.0
     depends_on:
       - config-server
     environment:
@@ -59,7 +59,7 @@ services:
     networks:
       - default
   pattern-atlas-api:
-    image: patternpedia/patternrepo-api:latest
+    image: patternpedia/patternrepo-api:v1.0.2
     profiles: ["all", "patternAtlas"]
     environment:
       JDBC_DATABASE_URL: db
@@ -73,7 +73,7 @@ services:
     networks:
       - default
   nisq-analyzer:
-    image: planqk/nisq-analyzer:latest
+    image: planqk/nisq-analyzer:v1.2.0
     profiles: ["all", "nisqAnalyzer", "nisqAnalyzerCompilerComparison"]
     environment:
       POSTGRES_HOSTNAME: db
@@ -104,12 +104,12 @@ services:
       - default
   # used by qc-atlas-ui to render latex
   latex-renderer:
-    image: planqk/latex-renderer:latest
+    image: planqk/latex-renderer:v1.0.1
     ports:
       - "8083:8082"
 
   quantum-transpiler:
-    image: planqk/quantum-transpiler-backend:latest
+    image: planqk/quantum-transpiler-backend:v1.0.0
     profiles: ["all", "nisqAnalyzerCompilerComparison"]
     ports:
      - '5000:5000'
@@ -117,7 +117,7 @@ services:
      - default
 
   quantum-transpiler-frontend:
-    image: planqk/quantum-transpiler-frontend:latest
+    image: planqk/quantum-transpiler-frontend:v1.0.0
     profiles: ["all", "nisqAnalyzerCompilerComparison"]
     ports:
      - '8086:80'
@@ -126,7 +126,7 @@ services:
 
   # used by nisq analyzer for execution and transpilation
   qiskit-service:
-    image: planqk/qiskit-service:latest
+    image: planqk/qiskit-service:v1.2.0
     profiles: ["all", "nisqAnalyzer", "nisqAnalyzerCompilerComparison", "qprov"]
     command: sh /app/startup.sh
     ports:
@@ -140,7 +140,7 @@ services:
       - default
 
   qiskit-rq-worker:
-    image: planqk/qiskit-service:latest
+    image: planqk/qiskit-service:v1.2.0
     profiles: ["all", "nisqAnalyzer", "nisqAnalyzerCompilerComparison", "qprov"]
     command: rq worker --url redis://redis qiskit-service_execute
     environment:
@@ -154,7 +154,7 @@ services:
       replicas: 1
 
   forest-service:
-    image: planqk/forest-service:latest
+    image: planqk/forest-service:v1.0.0
     profiles: ["all", "nisqAnalyzerCompilerComparison"]
     command: sh /app/startup.sh
     ports:
@@ -172,7 +172,7 @@ services:
       - default
 
   forest-rq-worker:
-    image: planqk/forest-service:latest
+    image: planqk/forest-service:v1.0.0
     profiles: ["all", "nisqAnalyzerCompilerComparison"]
     command: rq worker --url redis://redis forest-service_execute
     environment:
@@ -190,7 +190,7 @@ services:
       - default
 
   pytket-service:
-    image: planqk/pytket-service:latest
+    image: planqk/pytket-service:v1.0.0
     profiles: ["all", "nisqAnalyzerCompilerComparison"]
     command: sh /app/startup.sh
     ports:
@@ -206,7 +206,7 @@ services:
       - default
 
   pytket-rq-worker:
-    image: planqk/pytket-service:latest
+    image: planqk/pytket-service:v1.0.0
     profiles: ["all", "nisqAnalyzerCompilerComparison"]
     command: rq worker --url redis://redis pytket-service_execute
     environment:
@@ -247,7 +247,7 @@ services:
     networks:
       - default
   qprov:
-    image: planqk/qprov:latest
+    image: planqk/qprov:v1.1.1
     profiles: ["all", "nisqAnalyzer", "nisqAnalyzerCompilerComparison", "qprov"]
     environment:
       POSTGRES_HOSTNAME: db
@@ -260,7 +260,7 @@ services:
     networks:
       - default
   qprov-collector-ibm:
-    image: planqk/qprov-collector:latest
+    image: planqk/qprov-collector:v1.1.1
     profiles: ["all", "nisqAnalyzer", "nisqAnalyzerCompilerComparison", "qprov"]
     environment:
       POSTGRES_HOSTNAME: db
