@@ -240,7 +240,7 @@ services:
       - default
   # redis server for qiskit service
   redis:
-    image: redis:latest
+    image: redis:6.2.2
     profiles: ["all", "nisqAnalyzer", "nisqAnalyzerCompilerComparison", "qprov"]
     ports:
       - "6379:6379"
