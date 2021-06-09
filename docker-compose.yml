@@ -106,13 +106,13 @@ services:
   latex-renderer:
     image: planqk/latex-renderer:v1.0.1
     ports:
-      - "5012:5012"
+      - "5030:5030"
 
   quantum-transpiler:
     image: planqk/quantum-transpiler-backend:v1.0.0
     profiles: ["all", "nisqAnalyzerCompilerComparison"]
     ports:
-     - '5011:5011'
+     - '5012:5012'
     networks:
      - default
 
@@ -120,7 +120,7 @@ services:
     image: planqk/quantum-transpiler-frontend:v1.0.0
     profiles: ["all", "nisqAnalyzerCompilerComparison"]
     ports:
-     - '4212:80'
+     - '5011:80'
     networks:
      - default
 
@@ -194,7 +194,7 @@ services:
     profiles: ["all", "nisqAnalyzerCompilerComparison"]
     command: sh /app/startup.sh
     ports:
-      - "5001:5000"
+      - "5015:5015"
     environment:
       - REDIS_URL=redis://redis
       - DATABASE_URL=sqlite:////data/app.db
