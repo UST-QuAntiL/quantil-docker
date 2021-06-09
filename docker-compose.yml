@@ -21,7 +21,7 @@ services:
       # use this volume to save the postgres data
       # - ./postgres-data:/var/lib/postgresql/data
     ports:
-      - '5432:5432'
+      - '5060:5060'
     networks:
       - default
   qc-atlas-ui:
@@ -33,13 +33,13 @@ services:
       # from the container itself we have to specify localhost here
       # and **not** the container name
       QC_ATLAS_HOST_NAME: localhost
-      QC_ATLAS_PORT: 8080
+      QC_ATLAS_PORT: 6626
       PATTERN_ATLAS_HOST_NAME: localhost
-      PATTERN_ATLAS_PORT: 8082
+      PATTERN_ATLAS_PORT: 1977
       NISQ_ANALYZER_HOST_NAME: localhost
-      NISQ_ANALYZER_PORT: 8081
+      NISQ_ANALYZER_PORT: 5010
       QPROV_HOST_NAME: localhost
-      QPROV_PORT: 8084
+      QPROV_PORT: 5020
     ports:
       - '80:80'
     volumes:
@@ -50,12 +50,12 @@ services:
     image: planqk/atlas:v2.0.0
     environment:
       POSTGRES_HOSTNAME: db
-      POSTGRES_PORT: 5432
+      POSTGRES_PORT: 5060
       POSTGRES_USER: planqk
       POSTGRES_PASSWORD: planqk
       POSTGRES_DB: planqk
     ports:
-      - "8080:8080"
+      - "6626:6626"
     networks:
       - default
   pattern-atlas-api:
@@ -66,10 +66,10 @@ services:
       JDBC_DATABASE_NAME: patternpedia
       JDBC_DATABASE_USERNAME: patternpedia
       JDBC_DATABASE_PASSWORD: patternpedia
-      JDBC_DATABASE_PORT: 5432
-      API_PORT: 8080
+      JDBC_DATABASE_PORT: 5060
+      API_PORT: 1977
     ports:
-      - '8082:8080'
+      - '1977:1977'
     networks:
       - default
   nisq-analyzer:
@@ -77,7 +77,7 @@ services:
     profiles: ["all", "nisqAnalyzer", "nisqAnalyzerCompilerComparison"]
     environment:
       POSTGRES_HOSTNAME: db
-      POSTGRES_PORT: 5432
+      POSTGRES_PORT: 5060
       POSTGRES_USER: nisq
       POSTGRES_PASSWORD: nisq
       POSTGRES_DB: nisq
@@ -87,32 +87,32 @@ services:
 
       # Configure QPROV connection
       QPROV_HOSTNAME: qprov
-      QPROV_PORT: 8080
+      QPROV_PORT: 5020
       TRANSLATOR_HOSTNAME: quantum-transpiler
-      TRANSLATOR_PORT: 5000
+      TRANSLATOR_PORT: 5012
 
       # Configuration of the SDK Connector Services
       QISKIT_HOSTNAME: qiskit-service
-      QISKIT_PORT: 5000
-      PYTKET_HOSTNAME: pytket-service
-      PYTKET_PORT: 5000
+      QISKIT_PORT: 5013
       FOREST_HOSTNAME: forest-service
-      FOREST_PORT: 5000
+      FOREST_PORT: 5014
+      PYTKET_HOSTNAME: pytket-service
+      PYTKET_PORT: 5015
     ports:
-      - '8081:8080'
+      - '5010:5010'
     networks:
       - default
   # used by qc-atlas-ui to render latex
   latex-renderer:
     image: planqk/latex-renderer:v1.0.1
     ports:
-      - "8083:8082"
+      - "5012:5012"
 
   quantum-transpiler:
     image: planqk/quantum-transpiler-backend:v1.0.0
     profiles: ["all", "nisqAnalyzerCompilerComparison"]
     ports:
-     - '5000:5000'
+     - '5011:5011'
     networks:
      - default
 
@@ -120,7 +120,7 @@ services:
     image: planqk/quantum-transpiler-frontend:v1.0.0
     profiles: ["all", "nisqAnalyzerCompilerComparison"]
     ports:
-     - '8086:80'
+     - '4212:80'
     networks:
      - default
 
@@ -130,7 +130,7 @@ services:
     profiles: ["all", "nisqAnalyzer", "nisqAnalyzerCompilerComparison", "qprov"]
     command: sh /app/startup.sh
     ports:
-      - "5003:5000"
+      - "5013:5013"
     environment:
       - REDIS_URL=redis://redis
       - DATABASE_URL=sqlite:////data/app.db
@@ -158,14 +158,14 @@ services:
     profiles: ["all", "nisqAnalyzerCompilerComparison"]
     command: sh /app/startup.sh
     ports:
-      - "5002:5000"
+      - "5014:5014"
     environment:
       - REDIS_URL=redis://redis
       - DATABASE_URL=sqlite:////data/app.db
       - QVM_HOSTNAME=rigetti-qvm
-      - QVM_PORT=5666
+      - QVM_PORT=5016
       - QUILC_HOSTNAME=rigetti-quilc
-      - QUILC_PORT=5667
+      - QUILC_PORT=5017
     volumes:
       - exec_data:/data
     networks:
@@ -179,9 +179,9 @@ services:
       - REDIS_URL=redis://redis
       - DATABASE_URL=sqlite:////data/app.db
       - QVM_HOSTNAME=rigetti-qvm
-      - QVM_PORT=5666
+      - QVM_PORT=5016
       - QUILC_HOSTNAME=rigetti-quilc
-      - QUILC_PORT=5667
+      - QUILC_PORT=5017
     volumes:
       - exec_data:/data
     depends_on:
@@ -225,8 +225,8 @@ services:
     image: rigetti/qvm
     profiles: ["all", "nisqAnalyzerCompilerComparison"]
     ports:
-      - "5666:5666"
-    command: -S -p 5666
+      - "5016:5016"
+    command: -S -p 5016
     networks:
       - default
 
@@ -234,8 +234,8 @@ services:
     image: rigetti/quilc
     profiles: ["all", "nisqAnalyzerCompilerComparison"]
     ports:
-      - "5667:5667"
-    command: -S -p 5667
+      - "5017:5017"
+    command: -S -p 5017
     networks:
       - default
   # redis server for qiskit service
@@ -243,7 +243,8 @@ services:
     image: redis:6.2.2
     profiles: ["all", "nisqAnalyzer", "nisqAnalyzerCompilerComparison", "qprov"]
     ports:
-      - "6379:6379"
+      - "5040:5040"
+      # todo: add command?
     networks:
       - default
   qprov:
@@ -251,12 +252,12 @@ services:
     profiles: ["all", "nisqAnalyzer", "nisqAnalyzerCompilerComparison", "qprov"]
     environment:
       POSTGRES_HOSTNAME: db
-      POSTGRES_PORT: 5432
+      POSTGRES_PORT: 5060
       POSTGRES_USER: qprov
       POSTGRES_PASSWORD: qprov
       POSTGRES_DB: qprov
     ports:
-      - "8084:8080"
+      - "5020:5020"
     networks:
       - default
   qprov-collector-ibm:
@@ -264,7 +265,7 @@ services:
     profiles: ["all", "nisqAnalyzer", "nisqAnalyzerCompilerComparison", "qprov"]
     environment:
       POSTGRES_HOSTNAME: db
-      POSTGRES_PORT: 5432
+      POSTGRES_PORT: 5060
       POSTGRES_USER: qprov
       POSTGRES_PASSWORD: qprov
       POSTGRES_DB: qprov
@@ -274,9 +275,9 @@ services:
       QPROV_IBMQ_AUTO_COLLECT_INTERVAL: 60
       QPROV_IBMQ_AUTO_COLLECT_INTERVAL_CIRCUITS: 180
       QISKIT_SERVICE_HOSTNAME: qiskit-service
-      QISKIT_SERVICE_PORT: 5000
+      QISKIT_SERVICE_PORT: 5013
     ports:
-      - "8085:8080"
+      - "5021:5021"
     networks:
       - default
   config-server:
