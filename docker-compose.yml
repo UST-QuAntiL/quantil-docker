@@ -25,7 +25,7 @@ services:
     networks:
       - default
   qc-atlas-ui:
-    image: planqk/qc-atlas-ui:latest
+    image: planqk/qc-atlas-ui:v2.0.0
     depends_on:
       - config-server
     environment:

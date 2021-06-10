@@ -41,7 +41,7 @@ For running all feature sets, choose `--profile all`.
 
 | QuAntiL Component | URL | GitHub | Docker Hub |
 |:------------------- |:--- |:------ |:---------- |
-| QC-Atlas-UI |<http://localhost> | [Link](https://github.com/UST-QuAntiL/qc-atlas-ui) | [Link](https://hub.docker.com/r/planqk/qc-atlas-ui) |
+| QC-Atlas-UI |<http://localhost:80> | [Link](https://github.com/UST-QuAntiL/qc-atlas-ui) | [Link](https://hub.docker.com/r/planqk/qc-atlas-ui) |
 | QC-Atlas |<http://localhost:6626/atlas> | [Link](https://github.com/UST-QuAntiL/qc-atlas) | [Link](https://hub.docker.com/r/planqk/atlas) |
 | Pattern-Atlas-API |<http://localhost:1977/patternpedia> | [Link](https://github.com/PatternAtlas/pattern-atlas-api) | [Link](https://hub.docker.com/r/patternpedia/patternrepo-api) |
 | NISQ-Analyzer |<http://localhost:5010/nisq-analyzer> | [Link](https://github.com/UST-QuAntiL/nisq-analyzer) | [Link](https://hub.docker.com/r/planqk/nisq-analyzer) |
