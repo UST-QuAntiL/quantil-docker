@@ -1,10 +1,10 @@
 {
   "features": {
     "nisqAnalyzer": "false",
-    "qprov": "true",
-    "patternAtlas": "true",
+    "qprov": "false",
+    "patternAtlas": "false",
     "nisqAnalyzerCompilerComparison": "false",
     "nisqAnalyzerQpuSelection": "true",
-    "showSettings": "true"
+    "showSettings": "false"
   }
 }
