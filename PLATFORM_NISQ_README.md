@@ -11,7 +11,7 @@ This guidance guides you through the [QC Atlas UI](https://github.com/UST-QuAnti
 ### Prerequisites for the NISQ Analyzer and the given Implementation
 To use the NISQ Analyzer on the PlanQK platform content, currenly only Qiskit-based implementations are supported.
 Thus the _technology_ field is used to specify the used SDK, i.e., Qiskit, while the version field specifies the programming languages used, e.g., Qiskit or OpenQASM.
-Also note that only the first file on the platform is currently used by the NISQ Analyzer for analyzing and executing the implementation.
+Please note that currently only the first file on the platform is used by the NISQ Analyzer for analyzing and executing the implementation.
 A current limitation is that only fixed circuits, i.e., circuits that do not require input parameters, can be executed. The Shor implementation is such an example.
 
 ### 1. Add Qiskit Credentials to docker-compose.yml
