@@ -1,4 +1,4 @@
-# use this file to start the db service with example data 
+# use this file to start the db service with example data
 # provided by the nisq and planqk content repositories.
 # Make sure the ./ssh_secret file is present to clone the private atlas content repo
 # and the nisq analyzer content repo.
@@ -9,6 +9,10 @@ services:
     secrets:
       - source: ssh_secret
         target: ssh_secret
+
+  qprov-collector-ibm:
+    environment:
+      QPROV_IBMQ_TOKEN: ''
 
 secrets:
   ssh_secret:
