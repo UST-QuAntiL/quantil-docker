@@ -8,33 +8,34 @@ This guidance guides you through the [QC Atlas UI](https://github.com/UST-QuAnti
 + Clone [quantil-docker repository](https://github.com/UST-QuAntiL/quantil-docker)
 + Required ports are listed [here](https://github.com/UST-QuAntiL/quantil-docker#readme)
 
-### Prerequisites for the NISQ Analyzer and the given Implementation
+## Getting started using the NISQ Analyzer for the PlanQK Platform
 To use the NISQ Analyzer on the PlanQK platform content, currenly only Qiskit-based implementations are supported.
 Thus the _technology_ field is used to specify the used SDK, i.e., Qiskit, while the version field specifies the programming languages used, e.g., Qiskit or OpenQASM.
 Please note that currently only the first file on the platform is used by the NISQ Analyzer for analyzing and executing the implementation.
 A current limitation is that only fixed circuits, i.e., circuits that do not require input parameters, can be executed. The Shor implementation is such an example.
 
-### 1. Add Qiskit Credentials to docker-compose.yml
-Currently only quantum computers of IBMQ are supported. Thus, you must insert your Qiskit token into the docker-compose.yml ([here](https://github.com/UST-QuAntiL/quantil-docker/blob/06232eb6520a83333405d8c83d85eace27f96a37/docker-compose.yml#L271)) file for accessing them:
+### 1. Add Qiskit Credentials to docker-compose.override.yml
+1. Copy [docker-compose.nisq.analyzer.override.yml](docker-compose.nisq.analyzer.override.yml) file to `docker-compose.override.yml`.
+2. Insert your Qiskit token at `QPROV_IBMQ_TOKEN: 'your-qiskit-token-here'` in the new `docker-compose.override.yml`.
 
-`QPROV_IBMQ_TOKEN: 'your-qiskit-token-here'`
+**Note:** Currently only quantum computers of IBMQ are supported.
 
 ### 2. Run QC Atlas UI and the NISQ Analyzer
-Open a console, navigate to the folder of the quantil-docker, and insert:
+Open a console, navigate to the folder of the quantil-docker, and run the following commands:
 
 1. `docker-compose --profile nisqAnalyzer pull`
 2. `docker-compose build db`
 3. `docker-compose --profile nisqAnalyzer up`
 
-After waiting a few seconds, open a browser window on http://localhost:80.
-The QC Atlas UI should be visible.
+After a few seconds, the ecosystem is up and running and you can access it via the browser on <http://localhost:80>.
+The QC Atlas UI is visible.
 
 ### 3. Login to PlanQK Platform
-To login in to the platform, click the user button on the top right and paste username and password of your PlanQK platform credentials.
+To login in to the platform, click the user button on the top right and insert your PlanQK platform username and password.
 
 <img width="1590" alt="platform-login" src="https://user-images.githubusercontent.com/23473511/122178127-983ce800-ce86-11eb-9514-f5beb4d62285.png">
 
-Now, the list of algorithms of the platform are displayed.
+Now, the list of algorithms available in the platform are displayed.
 
 ### 4. Using the NISQ Analyzer for selecting suitable quantum computers for a specific implementation
 
@@ -43,17 +44,17 @@ Now, the list of algorithms of the platform are displayed.
 
 <img width="1590" alt="implementations" src="https://user-images.githubusercontent.com/23473511/122180174-793f5580-ce88-11eb-88b1-a7094319a81e.png">
 
-3. In context of the implementation, click on the _NISQ Analyzer_ tab. 
+3. In context of the implementation, click on the _NISQ Analyzer_ tab.
 
 <img width="1590" alt="implementation-NISQ-Analyzer" src="https://user-images.githubusercontent.com/23473511/122180990-37fb7580-ce89-11eb-9ccf-5a96557c3bf8.png">
 
-4. For starting the quantum computer selection, click on _New Analysis_, select the vendor and insert your Qiskit token. You can also enable/disable if simulators should be included. Then, click ok to start the analysis.
+4. To start the quantum computer selection, click on _New Analysis_, select the vendor and insert your Qiskit token. You can also enable/disable if simulators should be included. Then, click ok to start the analysis.
 5. Now a new analysis job is created. When the analysis job is finished a _Show analysis_ button occurs on the right side. While waiting, you can browse through the QC Atlas UI.
 6. When clicking on the _Show analysis_ button suitable quantum computers (and simulators) are listed.
 
 <img width="1590" alt="analysis-result" src="https://user-images.githubusercontent.com/23473511/122182995-18654c80-ce8b-11eb-9044-be4f09ca3317.png">
 
-7. You can also execute the implementation on the suitable quantum computers (and simulators) by clicking the _Execute_ button. After clicking, a _Show result_ button occurs which expands the table row and displays status and result of the execution.
+7. You can also execute the implementation on the suitable quantum computers (and simulators) by clicking the _Execute_ button. After clicking, the _Show result_ button occurs which expands the table row and displays status and result of the execution.
 8. When the execution is complete, the result is displayed.
 
 <img width="1590" alt="execution-result" src="https://user-images.githubusercontent.com/23473511/122183561-a2adb080-ce8b-11eb-94ac-c366dc8a0264.png">
@@ -61,13 +62,13 @@ Now, the list of algorithms of the platform are displayed.
 ### 5. Stop the environment
 
 1. To stop the environment go to the console window with the docker-compose running, stop the process (e.g. control+shift+C for Mac).
-2. To remove all volumes insert `docker-compose down -v`.
+2. To remove all volumes run `docker-compose down -v`.
 
 ## Acknowledgements
 
  Current development is supported by the [Federal Ministry for Economic Affairs and Energy] as part of the [PlanQK] project (01MK20005N) and the DFG’s Excellence Initiative project [SimTech] (EXC 2075 - 390740016).
 
- ## Haftungsausschluss
+## Haftungsausschluss
 
  Dies ist ein Forschungsprototyp.
  Die Haftung für entgangenen Gewinn, Produktionsausfall, Betriebsunterbrechung, entgangene Nutzungen, Verlust von Daten und Informationen, Finanzierungsaufwendungen sowie sonstige Vermögens- und Folgeschäden ist, außer in Fällen von grober Fahrlässigkeit, Vorsatz und Personenschäden, ausgeschlossen.
