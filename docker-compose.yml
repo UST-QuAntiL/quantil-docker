@@ -154,7 +154,7 @@ services:
       replicas: 1
 
   forest-service:
-    image: planqk/forest-service:v1.0.0
+    image: planqk/forest-service:latest
     profiles: ["all", "nisqAnalyzerCompilerComparison"]
     command: sh /app/startup.sh
     ports:
@@ -172,7 +172,7 @@ services:
       - default
 
   forest-rq-worker:
-    image: planqk/forest-service:v1.0.0
+    image: planqk/forest-service:latest
     profiles: ["all", "nisqAnalyzerCompilerComparison"]
     command: rq worker --url redis://redis forest-service_execute
     environment:
@@ -190,7 +190,7 @@ services:
       - default
 
   pytket-service:
-    image: planqk/pytket-service:v1.0.0
+    image: planqk/pytket-service:latest
     profiles: ["all", "nisqAnalyzerCompilerComparison"]
     command: sh /app/startup.sh
     ports:
@@ -206,7 +206,7 @@ services:
       - default
 
   pytket-rq-worker:
-    image: planqk/pytket-service:v1.0.0
+    image: planqk/pytket-service:latest
     profiles: ["all", "nisqAnalyzerCompilerComparison"]
     command: rq worker --url redis://redis pytket-service_execute
     environment:
