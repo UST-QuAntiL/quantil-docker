@@ -248,7 +248,7 @@ services:
     networks:
       - default
   qprov:
-    image: planqk/qprov:latest
+    image: planqk/qprov:v1.1.2
     profiles: ["all", "nisqAnalyzer", "nisqAnalyzerCompilerComparison", "qprov"]
     environment:
       POSTGRES_HOSTNAME: db
@@ -261,7 +261,7 @@ services:
     networks:
       - default
   qprov-collector-ibm:
-    image: planqk/qprov-collector:latest
+    image: planqk/qprov-collector:v1.1.2
     profiles: ["all", "nisqAnalyzer", "nisqAnalyzerCompilerComparison", "qprov"]
     environment:
       POSTGRES_HOSTNAME: db
