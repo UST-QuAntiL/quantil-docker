@@ -104,12 +104,12 @@ services:
       - default
   # used by qc-atlas-ui to render latex
   latex-renderer:
-    image: planqk/latex-renderer:latest
+    image: planqk/latex-renderer:v1.1.1
     ports:
       - "5030:5030"
 
   quantum-transpiler:
-    image: planqk/quantum-transpiler-backend:v1.1.0
+    image: planqk/quantum-transpiler-backend:v1.0.1
     profiles: ["all", "nisqAnalyzerCompilerComparison"]
     ports:
      - '5012:5012'
@@ -117,7 +117,7 @@ services:
      - default
 
   quantum-transpiler-frontend:
-    image: planqk/quantum-transpiler-frontend:v1.1.0
+    image: planqk/quantum-transpiler-frontend:v1.0.1
     profiles: ["all", "nisqAnalyzerCompilerComparison"]
     ports:
      - '5011:80'
