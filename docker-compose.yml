@@ -15,7 +15,7 @@ services:
       POSTGRES_DATABASES: 'planqk:planqk|nisq:nisq|patternatlas:patternatlas|qprov:qprov'
       ATLAS_DB: planqk
       NISQ_DB: nisq
-      PATTERNPEDIA_DB: patternatlas
+      PATTERNATLAS_DB: patternatlas
       QPROV_DB: qprov
     #volumes:
       # use this volume to save the postgres data
