@@ -10,12 +10,12 @@ services:
     image: quantil-db
     environment:
       # specifies user:pw for each container
-      POSTGRES_USERS: 'planqk:planqk|nisq:nisq|patternpedia:patternpedia|qprov:qprov'
+      POSTGRES_USERS: 'planqk:planqk|nisq:nisq|patternatlas:patternatlas|qprov:qprov'
       # specifies db name for each container
-      POSTGRES_DATABASES: 'planqk:planqk|nisq:nisq|patternpedia:patternpedia|qprov:qprov'
+      POSTGRES_DATABASES: 'planqk:planqk|nisq:nisq|patternatlas:patternatlas|qprov:qprov'
       ATLAS_DB: planqk
       NISQ_DB: nisq
-      PATTERNPEDIA_DB: patternpedia
+      PATTERNATLAS_DB: patternatlas
       QPROV_DB: qprov
     #volumes:
       # use this volume to save the postgres data
@@ -59,13 +59,13 @@ services:
     networks:
       - default
   pattern-atlas-api:
-    image: patternpedia/patternrepo-api:latest
+    image: patternatlas/pattern-atlas-api:latest
     profiles: ["all", "patternAtlas"]
     environment:
       JDBC_DATABASE_URL: db
-      JDBC_DATABASE_NAME: patternpedia
-      JDBC_DATABASE_USERNAME: patternpedia
-      JDBC_DATABASE_PASSWORD: patternpedia
+      JDBC_DATABASE_NAME: patternatlas
+      JDBC_DATABASE_USERNAME: patternatlas
+      JDBC_DATABASE_PASSWORD: patternatlas
       JDBC_DATABASE_PORT: 5060
       API_PORT: 1977
     ports:

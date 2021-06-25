@@ -29,13 +29,13 @@ To start a certain feature set run:
   docker-compose --profile <name-of-feature-set> pull
   docker-compose --profile <name-of-feature-set> up
   ```
-  
+
 For running multiple feature sets, e.g. two sets, run:
   ```shell
   docker-compose --profile <name-of-feature-set-1> --profile <name-of-feature-set-2> pull
   docker-compose --profile <name-of-feature-set-1> --profile <name-of-feature-set-2> up
   ```
-  
+
 For running all feature sets, choose `--profile all`.
 
 
@@ -43,7 +43,7 @@ For running all feature sets, choose `--profile all`.
 |:------------------- |:--- |:------ |:---------- |
 | QC-Atlas-UI |<http://localhost:80> | [Link](https://github.com/UST-QuAntiL/qc-atlas-ui) | [Link](https://hub.docker.com/r/planqk/qc-atlas-ui) |
 | QC-Atlas |<http://localhost:6626/atlas> | [Link](https://github.com/UST-QuAntiL/qc-atlas) | [Link](https://hub.docker.com/r/planqk/atlas) |
-| Pattern-Atlas-API |<http://localhost:1977/patternpedia> | [Link](https://github.com/PatternAtlas/pattern-atlas-api) | [Link](https://hub.docker.com/r/patternpedia/patternrepo-api) |
+| Pattern-Atlas-API |<http://localhost:1977/patternatlas> | [Link](https://github.com/PatternAtlas/pattern-atlas-api) | [Link](https://hub.docker.com/r/patternatlas/patternrepo-api) |
 | NISQ-Analyzer |<http://localhost:5010/nisq-analyzer> | [Link](https://github.com/UST-QuAntiL/nisq-analyzer) | [Link](https://hub.docker.com/r/planqk/nisq-analyzer) |
 | Quantum-Transpiler-Frontend |<http://localhost:5011> | [Link](https://github.com/UST-QuAntiL/QuantumTranspiler) | [Link](https://hub.docker.com/r/planqk/quantum-transpiler-frontend) |
 | Quantum-Transpiler-Backend |<http://localhost:5012> | [Link](https://github.com/UST-QuAntiL/QuantumTranspiler) | [Link](https://hub.docker.com/r/planqk/quantum-transpiler-backend) |
