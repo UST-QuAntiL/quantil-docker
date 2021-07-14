@@ -72,6 +72,21 @@ services:
       - '1977:1977'
     networks:
       - default
+  pattern-atlas-ui:
+    image: patternpedia/patternrepo-ui:latest
+    profiles: [ "all", "patternAtlas" ]
+    depends_on:
+      - config-server
+    environment:
+      # because the requests are performed from the browser and not
+      # from the container itself we have to specify localhost here
+      # and **not** the container name
+      PATTERN_ATLAS_API_HOST_NAME: localhost
+      PATTERN_ATLAS_API_PORT: 1977
+      LATEX_RENDERER_HOST_NAME: localhost
+      LATEX_RENDERER_PORT: 5030
+    ports:
+      - "4200:80"
   nisq-analyzer:
     image: planqk/nisq-analyzer:v1.3.0
     profiles: ["all", "nisqAnalyzer", "nisqAnalyzerCompilerComparison"]
