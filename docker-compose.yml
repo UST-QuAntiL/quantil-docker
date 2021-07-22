@@ -86,7 +86,7 @@ services:
       LATEX_RENDERER_HOST_NAME: localhost
       LATEX_RENDERER_PORT: 5030
     ports:
-      - "81:80"
+      - "1978:80"
   nisq-analyzer:
     image: planqk/nisq-analyzer:v1.3.0
     profiles: ["all", "nisqAnalyzer", "nisqAnalyzerCompilerComparison"]
