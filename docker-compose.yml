@@ -73,7 +73,7 @@ services:
     networks:
       - default
   pattern-atlas-ui:
-    image: patternatlas/patternrepo-ui:v1.2.0
+    image: patternatlas/pattern-atlas-ui:v1.2.0
     profiles: [ "all", "patternAtlas" ]
     depends_on:
       - config-server
