@@ -31,4 +31,6 @@ COPY setup-patternatlas.sh setup-patternatlas.sh
 EXPOSE 5060
 
 # if ssh key is set, clone data repos containing sql dumbs for initalization and start postgres afterwards
-CMD  chmod 700 clone-data-repo.sh && ./clone-data-repo.sh && su postgres -c "/usr/local/bin/docker-entrypoint.sh postgres -p 5060"
+CMD  chmod 700 clone-data-repo.sh \
+    && ./clone-data-repo.sh \
+    && su postgres -c "/usr/local/bin/docker-entrypoint.sh postgres -p ${JDBC_DATABASE_PORT}"
