@@ -25,7 +25,7 @@ The base components QC Atlas, QC Atlas UI, LaTeX Renderer, and the databases wit
  docker-compose up
  ```
   
-> ⚠️ The database (db) needs to be started first in the second step to ensure that its initialization is finished before the other containers connect to it. 
+> ⚠️ The database (db) must be started before the other containers to ensure that it was fully initialized. Otherwise the other containers may fail to start."
 
 For running certain feature sets on top of the base components, [Profiles](https://docs.docker.com/compose/profiles/) are used.  
 To start a certain feature set run:
