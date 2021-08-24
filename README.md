@@ -19,21 +19,27 @@ A detailed documentation can be found [here](https://quantil.readthedocs.io/en/l
 The fastest way to get started is using [Docker Compose](https://docs.docker.com/compose/).  
 
 The base components QC Atlas, QC Atlas UI, LaTeX Renderer, and the databases without any of the named features run by default using:
-  ```shell
-  docker-compose pull
-  docker-compose up
-  ```
+```shell 
+ docker-compose pull
+ docker-compose up db -d
+ docker-compose up
+ ```
+  
+> ⚠️ The database (db) must be started before the other containers to ensure that it was fully initialized. Otherwise the other containers may fail to start.
+
 For running certain feature sets on top of the base components, [Profiles](https://docs.docker.com/compose/profiles/) are used.  
 To start a certain feature set run:
   ```shell
   docker-compose --profile <name-of-feature-set> pull
+  docker-compose up db -d
   docker-compose --profile <name-of-feature-set> up
   ```
   
 For running multiple feature sets, e.g. two sets, run:
   ```shell
   docker-compose --profile <name-of-feature-set-1> --profile <name-of-feature-set-2> pull
-  docker-compose --profile <name-of-feature-set-1> --profile <name-of-feature-set-2> up
+  docker-compose --profile <name-of-feature-set-1> up db -d
+  docker-compose --profile <name-of-feature-set-1> --profile <name-of-feature-set-2> up db
   ```
   
 For running all feature sets, choose `--profile all`.
