@@ -5,6 +5,7 @@
     "patternAtlas": "true",
     "nisqAnalyzerCompilerComparison": "true",
     "nisqAnalyzerQpuSelection": "true",
-    "showSettings": "true"
+    "showSettings": "true",
+    "enableEditing": "true"
   }
 }
