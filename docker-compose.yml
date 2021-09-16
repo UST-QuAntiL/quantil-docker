@@ -76,6 +76,8 @@ services:
       API_PORT: 1977
     ports:
       - '1977:1977'
+    depends_on: 
+      - db
     networks:
       - default
   pattern-atlas-ui:
