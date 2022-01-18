@@ -34,14 +34,14 @@ To start a certain feature set run:
   docker-compose up db -d
   docker-compose --profile <name-of-feature-set> up
   ```
-  
+
 For running multiple feature sets, e.g. two sets, run:
   ```shell
   docker-compose --profile <name-of-feature-set-1> --profile <name-of-feature-set-2> pull
   docker-compose --profile <name-of-feature-set-1> up db -d
   docker-compose --profile <name-of-feature-set-1> --profile <name-of-feature-set-2> up db
   ```
-  
+
 For running all feature sets, choose `--profile all`.
 
 
