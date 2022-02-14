@@ -58,8 +58,25 @@ services:
       POSTGRES_USER: planqk
       POSTGRES_PASSWORD: planqk
       POSTGRES_DB: planqk
+      WINERY_HOSTNAME: host.docker.internal
+      WINERY_PORT: 8091
     ports:
       - "6626:6626"
+    networks:
+      - default
+  winery:
+    image: opentosca/winery:latest
+    profiles: ["all", "winery"]
+    environment:
+      WINERY_PORT: 8091
+      WORKFLOWMODELER_PORT: 8091
+      TOPOLOGYMODELER_PORT: 8091
+      WINERY_HOSTNAME: host.docker.internal
+      WORKFLOWMODELER_HOSTNAME: host.docker.internal
+      TOPOLOGYMODELER_HOSTNAME: host.docker.internal
+      CONTAINER_HOSTNAME: host.docker.internal
+    ports:
+      - '8091:8080'
     networks:
       - default
   pattern-atlas-api:
