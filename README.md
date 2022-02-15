@@ -13,6 +13,7 @@ The defined feature sets are namely:
 - `nisqAnalyzerCompilerComparison`
 - `patternAtlas`
 - `qprov`
+- `winery`
 
 A detailed documentation can be found [here](https://quantil.readthedocs.io/en/latest/).  
 
@@ -38,27 +39,32 @@ For running multiple feature sets, e.g. two sets, run:
 
 For running all feature sets, choose `--profile all`.
 
+For running the feature set `winery`, the setup needs additional configuration:
+- Create a .env file by copying it from _.env
+- Add your publicly available FQDN or IP address to the PUBLIC_HOSTNAME variable in the .env file and save it
 
-| QuAntiL Component | URL | GitHub | Docker Hub |
-|:------------------- |:--- |:------ |:---------- |
-| QC-Atlas-UI |<http://localhost:80> | [Link](https://github.com/UST-QuAntiL/qc-atlas-ui) | [Link](https://hub.docker.com/r/planqk/qc-atlas-ui) |
-| QC-Atlas |<http://localhost:6626/atlas> | [Link](https://github.com/UST-QuAntiL/qc-atlas) | [Link](https://hub.docker.com/r/planqk/atlas) |
-| Pattern-Atlas-API |<http://localhost:1977/patternatlas> | [Link](https://github.com/PatternAtlas/pattern-atlas-api) | [Link](https://hub.docker.com/r/patternatlas/pattern-atlas-api) |
-| Pattern-Atlas-UI |<http://localhost:1978> | [Link](https://github.com/PatternAtlas/pattern-atlas-ui) | [Link](https://hub.docker.com/r/patternatlas/pattern-atlas-ui) |
-| NISQ-Analyzer |<http://localhost:5010/nisq-analyzer> | [Link](https://github.com/UST-QuAntiL/nisq-analyzer) | [Link](https://hub.docker.com/r/planqk/nisq-analyzer) |
-| Quantum-Transpiler-Frontend |<http://localhost:5011> | [Link](https://github.com/UST-QuAntiL/QuantumTranspiler) | [Link](https://hub.docker.com/r/planqk/quantum-transpiler-frontend) |
-| Quantum-Transpiler-Backend |<http://localhost:5012> | [Link](https://github.com/UST-QuAntiL/QuantumTranspiler) | [Link](https://hub.docker.com/r/planqk/quantum-transpiler-backend) |
-| Qiskit-Service |<http://localhost:5013> | [Link](https://github.com/UST-QuAntiL/qiskit-service) | [Link](https://hub.docker.com/r/planqk/qiskit-service) |
-| Forest-Service |<http://localhost:5014> | [Link](https://github.com/UST-QuAntiL/forest-service) | [Link](https://hub.docker.com/r/planqk/forest-service) |
-| Pytket-Service |<http://localhost:5015> | [Link](https://github.com/UST-QuAntiL/pytket-service) | [Link](https://hub.docker.com/r/planqk/pytket-service) |
-| Rigetti QVM |<http://localhost:5016> | [Link](https://github.com/rigetti/qvm) | [Link](https://hub.docker.com/r/rigetti/qvm) |
-| Rigetti Quilc |<http://localhost:5017> | [Link](https://github.com/rigetti/quilc) | [Link](https://hub.docker.com/r/rigetti/quilc) |
-| QProv |<http://localhost:5020/qprov> | [Link](https://github.com/UST-QuAntiL/qprov) | [Link](https://hub.docker.com/r/planqk/qprov) |
-| QProv-Collector-IBM |<http://localhost:5021> | [Link](https://github.com/UST-QuAntiL/qprov) | [Link](https://hub.docker.com/r/planqk/qprov-collector) |
-| Latex-Renderer |<http://localhost:5030> | [Link](https://github.com/UST-QuAntiL/latex-renderer) | [Link](https://hub.docker.com/repository/docker/planqk/latex-renderer) |
-| Redis |<http://localhost:5040> | [Link](https://github.com/redis/redis) | [Link](https://hub.docker.com/_/redis) |
-| Postgres-Multi DB | <tcp://localhost:5060> | [Link](https://github.com/lmm-git/docker-postgres-multi) | [Link](https://hub.docker.com/r/lmmdock/postgres-multi) |
-| Config-Server |<http://localhost:2379> | [Link](https://github.com/etcd-io/etcd) | [Link](https://quay.io/repository/coreos/etcd) |
+
+| QuAntiL Component           | URL                                   | GitHub                                                    | Docker Hub                                                             |
+|:----------------------------|:--------------------------------------|:----------------------------------------------------------|:-----------------------------------------------------------------------|
+| QC-Atlas-UI                 | <http://localhost:80>                 | [Link](https://github.com/UST-QuAntiL/qc-atlas-ui)        | [Link](https://hub.docker.com/r/planqk/qc-atlas-ui)                    |
+| QC-Atlas                    | <http://localhost:6626/atlas>         | [Link](https://github.com/UST-QuAntiL/qc-atlas)           | [Link](https://hub.docker.com/r/planqk/atlas)                          |
+| Pattern-Atlas-API           | <http://localhost:1977/patternatlas>  | [Link](https://github.com/PatternAtlas/pattern-atlas-api) | [Link](https://hub.docker.com/r/patternatlas/pattern-atlas-api)        |
+| Pattern-Atlas-UI            | <http://localhost:1978>               | [Link](https://github.com/PatternAtlas/pattern-atlas-ui)  | [Link](https://hub.docker.com/r/patternatlas/pattern-atlas-ui)         |
+| NISQ-Analyzer               | <http://localhost:5010/nisq-analyzer> | [Link](https://github.com/UST-QuAntiL/nisq-analyzer)      | [Link](https://hub.docker.com/r/planqk/nisq-analyzer)                  |
+| Quantum-Transpiler-Frontend | <http://localhost:5011>               | [Link](https://github.com/UST-QuAntiL/QuantumTranspiler)  | [Link](https://hub.docker.com/r/planqk/quantum-transpiler-frontend)    |
+| Quantum-Transpiler-Backend  | <http://localhost:5012>               | [Link](https://github.com/UST-QuAntiL/QuantumTranspiler)  | [Link](https://hub.docker.com/r/planqk/quantum-transpiler-backend)     |
+| Qiskit-Service              | <http://localhost:5013>               | [Link](https://github.com/UST-QuAntiL/qiskit-service)     | [Link](https://hub.docker.com/r/planqk/qiskit-service)                 |
+| Forest-Service              | <http://localhost:5014>               | [Link](https://github.com/UST-QuAntiL/forest-service)     | [Link](https://hub.docker.com/r/planqk/forest-service)                 |
+| Pytket-Service              | <http://localhost:5015>               | [Link](https://github.com/UST-QuAntiL/pytket-service)     | [Link](https://hub.docker.com/r/planqk/pytket-service)                 |
+| Rigetti QVM                 | <http://localhost:5016>               | [Link](https://github.com/rigetti/qvm)                    | [Link](https://hub.docker.com/r/rigetti/qvm)                           |
+| Rigetti Quilc               | <http://localhost:5017>               | [Link](https://github.com/rigetti/quilc)                  | [Link](https://hub.docker.com/r/rigetti/quilc)                         |
+| QProv                       | <http://localhost:5020/qprov>         | [Link](https://github.com/UST-QuAntiL/qprov)              | [Link](https://hub.docker.com/r/planqk/qprov)                          |
+| QProv-Collector-IBM         | <http://localhost:5021>               | [Link](https://github.com/UST-QuAntiL/qprov)              | [Link](https://hub.docker.com/r/planqk/qprov-collector)                |
+| Latex-Renderer              | <http://localhost:5030>               | [Link](https://github.com/UST-QuAntiL/latex-renderer)     | [Link](https://hub.docker.com/repository/docker/planqk/latex-renderer) |
+| Redis                       | <http://localhost:5040>               | [Link](https://github.com/redis/redis)                    | [Link](https://hub.docker.com/_/redis)                                 |
+| Postgres-Multi DB           | <tcp://localhost:5060>                | [Link](https://github.com/lmm-git/docker-postgres-multi)  | [Link](https://hub.docker.com/r/lmmdock/postgres-multi)                |
+| Config-Server               | <http://localhost:2379>               | [Link](https://github.com/etcd-io/etcd)                   | [Link](https://quay.io/repository/coreos/etcd)                         |
+| Winery                      | <http://localhost:8080>               | [Link](https://github.com/eclipse/winery)                 | [Link](https://hub.docker.com/r/opentosca/winery)                      |
 
 **Make sure following ports in your environment are free in order to start the QuAntiL environment properly:**
 
@@ -72,6 +78,7 @@ For running all feature sets, choose `--profile all`.
 * `5040`
 * `5060`
 * `6626`
+* `8080`
 
 ### Tips and Tricks
 
@@ -99,7 +106,7 @@ See [QuAntil documentation](https://ust-quantil.github.io/quantil-docs/developer
 
 ## Acknowledgements
 
- Current development is supported by the [Federal Ministry for Economic Affairs and Energy] as part of the [PlanQK] project (01MK20005N) and the DFG’s Excellence Initiative project [SimTech] (EXC 2075 - 390740016).
+ Current development is supported by the [Federal Ministry for Economic Affairs and Climate Action (BMWK)] as part of the [PlanQK] project (01MK20005N) and the DFG’s Excellence Initiative project [SimTech] (EXC 2075 - 390740016).
 
  ## Haftungsausschluss
 
@@ -115,6 +122,6 @@ See [QuAntil documentation](https://ust-quantil.github.io/quantil-docs/developer
 
  SPDX-License-Identifier: Apache-2.0
 
-   [Federal Ministry for Economic Affairs and Energy]: http://www.bmwi.de/EN
+   [Federal Ministry for Economic Affairs and Climate Action (BMWK)]: https://www.bmwk.de/EN
    [PlanQK]: https://planqk.de
    [SimTech]: https://www.simtech.uni-stuttgart.de/

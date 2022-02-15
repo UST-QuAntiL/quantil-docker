@@ -58,8 +58,24 @@ services:
       POSTGRES_USER: planqk
       POSTGRES_PASSWORD: planqk
       POSTGRES_DB: planqk
+      WINERY_PROTOCOL: http
+      WINERY_HOSTNAME: winery
+      WINERY_PORT: 8080
+      UPLOAD_FILE_SIZE: 150MB
     ports:
       - "6626:6626"
+    networks:
+      - default
+  winery:
+    image: opentosca/winery:latest
+    profiles: ["all", "winery"]
+    environment:
+      WINERY_HOSTNAME: ${PUBLIC_HOSTNAME}
+      WORKFLOWMODELER_HOSTNAME: ${PUBLIC_HOSTNAME}
+      TOPOLOGYMODELER_HOSTNAME: ${PUBLIC_HOSTNAME}
+      CONTAINER_HOSTNAME: ${PUBLIC_HOSTNAME}
+    ports:
+      - '8080:8080'
     networks:
       - default
   pattern-atlas-api:
