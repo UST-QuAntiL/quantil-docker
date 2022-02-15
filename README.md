@@ -13,6 +13,7 @@ The defined feature sets are namely:
 - `nisqAnalyzerCompilerComparison`
 - `patternAtlas`
 - `qprov`
+- `winery`
 
 A detailed documentation can be found [here](https://quantil.readthedocs.io/en/latest/).  
 
@@ -37,6 +38,10 @@ For running multiple feature sets, e.g. two sets, run:
   ```
 
 For running all feature sets, choose `--profile all`.
+
+For running the feature set `winery`, the setup needs additional configuration:
+- Create a .env file by copying it from _.env
+- Add your publicly available FQDN or IP address to the PUBLIC_HOSTNAME variable in the .env file and save it
 
 
 | QuAntiL Component | URL | GitHub | Docker Hub |
