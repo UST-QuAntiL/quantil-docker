@@ -107,7 +107,7 @@ See [QuAntil documentation](https://ust-quantil.github.io/quantil-docs/developer
 ## Acknowledgements
 
  Current development is supported by the [Federal Ministry for Economic Affairs and Climate Action (BMWK)] as part of the [PlanQK] project (01MK20005N) and the DFG’s Excellence Initiative project [SimTech] (EXC 2075 - 390740016).
- Current development is supported by the [Federal Ministry for Economic Affairs and Energy] as part of the [PlanQK] project (01MK20005N) and the DFG’s Excellence Initiative project [SimTech] (EXC 2075 - 390740016).
+ <img src="https://www.bmwi.de/SiteGlobals/BMWI/StyleBundles/Bilder/bmwi_logo_en.svg?__blob=normal" alt="Federal Ministry for Economics Affairs and Climate Action"  style="float: right; width=100px; margin: 20px" >
 
  ## Haftungsausschluss
 
