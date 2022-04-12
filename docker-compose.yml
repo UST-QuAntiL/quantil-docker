@@ -138,7 +138,7 @@ services:
 
       # Configure Prioritization Service connection
       PRIORITIZATION_HOSTNAME: qhana-plugin-runner
-      PRIORITIZATION_PORT: 8080
+      PRIORITIZATION_PORT: 9091
     ports:
       - '5010:5010'
     networks:
@@ -343,7 +343,7 @@ services:
       - redis
       - db
     ports:
-      - "5005:8080"
+      - "9091:9091"
     volumes:
       - instance:/app/instance
     environment:
@@ -377,7 +377,7 @@ services:
     volumes:
       - experiments:/app/data
     ports:
-      - 9090:9090
+      - "9090:9090"
     networks:
       - default
 networks:
