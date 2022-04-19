@@ -127,7 +127,6 @@ services:
       QPROV_PORT: 5020
       TRANSLATOR_HOSTNAME: quantum-transpiler
       TRANSLATOR_PORT: 5012
-
       # Configuration of the SDK Connector Services
       QISKIT_HOSTNAME: qiskit-service
       QISKIT_PORT: 5013
@@ -135,7 +134,6 @@ services:
       FOREST_PORT: 5014
       PYTKET_HOSTNAME: pytket-service
       PYTKET_PORT: 5015
-
       # Configure Prioritization Service connection
       PRIORITIZATION_HOSTNAME: qhana-plugin-runner
       PRIORITIZATION_PORT: 8080

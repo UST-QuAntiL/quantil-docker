@@ -82,7 +82,6 @@ For running the feature set `winery`, the setup needs additional configuration:
 * `6626`
 * `8080`
 
-
 ### Tips and Tricks
 
 ```bash
