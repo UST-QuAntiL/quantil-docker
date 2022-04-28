@@ -10,6 +10,10 @@ services:
       - source: ssh_secret
         target: ssh_secret
 
+  gateway:
+    environment:
+      IBMQ_TOKEN: ''
+
   qprov-collector-ibm:
     environment:
       QPROV_IBMQ_TOKEN: ''

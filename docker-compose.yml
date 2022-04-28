@@ -55,7 +55,6 @@ services:
   gateway:
     image: planqk/gateway:latest
     environment:
-      IBM_QUANTUM_TOKEN: token
       NISQ_ANALYZER_URI: http://nisq-analyzer:5010
     ports:
       - '6473:6473'
