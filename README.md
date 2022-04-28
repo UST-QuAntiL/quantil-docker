@@ -3,12 +3,7 @@
 # Dockerized QuAntiL Environment
 
 Docker Compose file for running the entire QuAntiL environment provided by the [QC Atlas UI](https://github.com/UST-QuAntiL/qc-atlas-ui).  
-Thereby, the [QC Atlas](https://github.com/UST-QuAntiL/qc-atlas) builds the basic knowledge base.  
-
-**NOTE** To use the NISQ Analyzer, an IBMQ token is required which can be set globally in the [Gateway](https://github.com/UST-QuAntiL/Gateway) service. 
-Therefore, copy-paste the [_docker-compose.override.yml](./docker-compose.override.yml) to `docker-compose.override.yml`.  
-Then, in the `docker-compose.override.yml` under gateway, set your IBMQ Qiskit token at `IBMQ_TOKEN:`.
-
+Thereby, the [QC Atlas](https://github.com/UST-QuAntiL/qc-atlas) builds the basic knowledge base.
 Furthermore, different features, e.g. [NISQ Analyzer](https://github.com/UST-QuAntiL/nisq-analyzer), [Pattern Atlas](https://github.com/PatternAtlas/pattern-atlas-api), and [QProv](https://github.com/UST-QuAntiL/qprov), are supported on top of the QC Atlas.  
 These features and their related backend components are defined as feature sets.  
 
@@ -22,7 +17,12 @@ The defined feature sets are namely:
 
 A detailed documentation can be found [here](https://quantil.readthedocs.io/en/latest/).  
 
-The fastest way to get started is using [Docker Compose](https://docs.docker.com/compose/).  
+The fastest way to get started is using [Docker Compose](https://docs.docker.com/compose/).
+
+:warning: To use the NISQ Analyzer, an IBMQ token is required which can be set globally in the [Gateway](https://github.com/UST-QuAntiL/Gateway) service.  
+Therefore, copy-paste the [_docker-compose.override.yml](./docker-compose.override.yml) to `docker-compose.override.yml`.  
+Then, in the `docker-compose.override.yml` under gateway, set your IBMQ Qiskit token at `IBMQ_TOKEN:`.
+
 
 The base components QC Atlas, QC Atlas UI, LaTeX Renderer, and the databases without any of the named features run by default using:
   ```shell
