@@ -68,6 +68,12 @@ services:
       - "6626:6626"
     networks:
       - default
+  library:
+    image: planqk/planqk-library:latest
+    ports:
+      - "2903:2903"
+    networks:
+      - default
   winery:
     image: opentosca/winery:latest
     profiles: ["all", "winery"]
