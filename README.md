@@ -66,12 +66,14 @@ For running the feature set `winery`, the setup needs additional configuration:
 | Config-Server               | <http://localhost:2379>               | [Link](https://github.com/etcd-io/etcd)                   | [Link](https://quay.io/repository/coreos/etcd)                         |
 | Winery                      | <http://localhost:8080>               | [Link](https://github.com/eclipse/winery)                 | [Link](https://hub.docker.com/r/opentosca/winery)                      |
 | QHAna Plugin Runner         |<http://localhost:5005>                | [Link](https://github.com/UST-QuAntiL/qhana-plugin-runner) | [Link](https://github.com/UST-QuAntiL/qhana-plugin-runner/pkgs/container/qhana-plugin-runner) |
+| PlanQK Library              |<http://localhost:2903>                | [Link](https://github.com/UST-QuAntiL/PlanQK-Library) | [Link](https://hub.docker.com/repository/docker/planqk/planqk-library) |
 
 **Make sure following ports in your environment are free in order to start the QuAntiL environment properly:**
 
 * `80`
 * `1977`
 * `1978`
+* `2903`
 * `2379`
 * `5005`
 * `5010`-`5017`
