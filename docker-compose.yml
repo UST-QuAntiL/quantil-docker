@@ -46,6 +46,9 @@ services:
       QPROV_PORT: 5020
       LATEX_RENDERER_HOST_NAME: localhost
       LATEX_RENDERER_PORT: 5030
+      LIBRARY_HOST_NAME: localhost
+      LIBRARY_PORT: 2903
+
     ports:
       - '80:80'
     volumes:
