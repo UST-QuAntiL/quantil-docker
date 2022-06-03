@@ -3,7 +3,7 @@
 # Dockerized QuAntiL Environment
 
 Docker Compose file for running the entire QuAntiL environment provided by the [QC Atlas UI](https://github.com/UST-QuAntiL/qc-atlas-ui).  
-Thereby, the [QC Atlas](https://github.com/UST-QuAntiL/qc-atlas) builds the basic knowledge base.  
+Thereby, the [QC Atlas](https://github.com/UST-QuAntiL/qc-atlas) builds the basic knowledge base.
 Furthermore, different features, e.g. [NISQ Analyzer](https://github.com/UST-QuAntiL/nisq-analyzer), [Pattern Atlas](https://github.com/PatternAtlas/pattern-atlas-api), and [QProv](https://github.com/UST-QuAntiL/qprov), are supported on top of the QC Atlas.  
 These features and their related backend components are defined as feature sets.  
 
@@ -17,7 +17,12 @@ The defined feature sets are namely:
 
 A detailed documentation can be found [here](https://quantil.readthedocs.io/en/latest/).  
 
-The fastest way to get started is using [Docker Compose](https://docs.docker.com/compose/).  
+The fastest way to get started is using [Docker Compose](https://docs.docker.com/compose/).
+
+:warning: To use the NISQ Analyzer, an IBMQ token is required which can be set globally in the [Gateway](https://github.com/UST-QuAntiL/Gateway) service.  
+Therefore, copy-paste the [_docker-compose.override.yml](./docker-compose.override.yml) to `docker-compose.override.yml`.  
+Then, in the `docker-compose.override.yml` under gateway, set your IBMQ Qiskit token at `IBMQ_TOKEN:`.
+
 
 The base components QC Atlas, QC Atlas UI, LaTeX Renderer, and the databases without any of the named features run by default using:
   ```shell
@@ -66,6 +71,7 @@ For running the feature set `winery`, the setup needs additional configuration:
 | Config-Server               | <http://localhost:2379>               | [Link](https://github.com/etcd-io/etcd)                   | [Link](https://quay.io/repository/coreos/etcd)                         |
 | Winery                      | <http://localhost:8080>               | [Link](https://github.com/eclipse/winery)                 | [Link](https://hub.docker.com/r/opentosca/winery)                      |
 | QHAna Plugin Runner         |<http://localhost:5005>                | [Link](https://github.com/UST-QuAntiL/qhana-plugin-runner) | [Link](https://github.com/UST-QuAntiL/qhana-plugin-runner/pkgs/container/qhana-plugin-runner) |
+| Gateway                     |<http://localhost:6473>                | [Link](https://github.com/UST-QuAntiL/Gateway)            | [Link](https://hub.docker.com/repository/docker/planqk/gateway)        |
 
 **Make sure following ports in your environment are free in order to start the QuAntiL environment properly:**
 
@@ -79,6 +85,7 @@ For running the feature set `winery`, the setup needs additional configuration:
 * `5030`
 * `5040`
 * `5060`
+* `6473`
 * `6626`
 * `8080`
 
