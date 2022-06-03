@@ -55,6 +55,14 @@ services:
       - ./config:/opt/init-config.d
     networks:
       - default
+  gateway:
+    image: planqk/gateway:latest
+    environment:
+      NISQ_ANALYZER_URI: http://nisq-analyzer:5010
+    ports:
+      - '6473:6473'
+    networks:
+      - default
   qc-atlas:
     image: planqk/atlas:latest
     environment:
