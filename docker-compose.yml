@@ -46,6 +46,9 @@ services:
       QPROV_PORT: 5020
       LATEX_RENDERER_HOST_NAME: localhost
       LATEX_RENDERER_PORT: 5030
+      LIBRARY_HOST_NAME: localhost
+      LIBRARY_PORT: 2903
+
     ports:
       - '80:80'
     volumes:
@@ -74,6 +77,12 @@ services:
       UPLOAD_FILE_SIZE: 150MB
     ports:
       - "6626:6626"
+    networks:
+      - default
+  library:
+    image: planqk/planqk-library:latest
+    ports:
+      - "2903:2903"
     networks:
       - default
   winery:

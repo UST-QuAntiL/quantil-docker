@@ -49,35 +49,37 @@ For running the feature set `winery`, the setup needs additional configuration:
 - Add your publicly available FQDN or IP address to the PUBLIC_HOSTNAME variable in the .env file and save it
 
 
-| QuAntiL Component           | URL                                   | GitHub                                                    | Docker Hub                                                             |
-|:----------------------------|:--------------------------------------|:----------------------------------------------------------|:-----------------------------------------------------------------------|
-| QC-Atlas-UI                 | <http://localhost:80>                 | [Link](https://github.com/UST-QuAntiL/qc-atlas-ui)        | [Link](https://hub.docker.com/r/planqk/qc-atlas-ui)                    |
-| QC-Atlas                    | <http://localhost:6626/atlas>         | [Link](https://github.com/UST-QuAntiL/qc-atlas)           | [Link](https://hub.docker.com/r/planqk/atlas)                          |
-| Pattern-Atlas-API           | <http://localhost:1977/patternatlas>  | [Link](https://github.com/PatternAtlas/pattern-atlas-api) | [Link](https://hub.docker.com/r/patternatlas/pattern-atlas-api)        |
-| Pattern-Atlas-UI            | <http://localhost:1978>               | [Link](https://github.com/PatternAtlas/pattern-atlas-ui)  | [Link](https://hub.docker.com/r/patternatlas/pattern-atlas-ui)         |
-| NISQ-Analyzer               | <http://localhost:5010/nisq-analyzer> | [Link](https://github.com/UST-QuAntiL/nisq-analyzer)      | [Link](https://hub.docker.com/r/planqk/nisq-analyzer)                  |
-| Quantum-Transpiler-Frontend | <http://localhost:5011>               | [Link](https://github.com/UST-QuAntiL/QuantumTranspiler)  | [Link](https://hub.docker.com/r/planqk/quantum-transpiler-frontend)    |
-| Quantum-Transpiler-Backend  | <http://localhost:5012>               | [Link](https://github.com/UST-QuAntiL/QuantumTranspiler)  | [Link](https://hub.docker.com/r/planqk/quantum-transpiler-backend)     |
-| Qiskit-Service              | <http://localhost:5013>               | [Link](https://github.com/UST-QuAntiL/qiskit-service)     | [Link](https://hub.docker.com/r/planqk/qiskit-service)                 |
-| Forest-Service              | <http://localhost:5014>               | [Link](https://github.com/UST-QuAntiL/forest-service)     | [Link](https://hub.docker.com/r/planqk/forest-service)                 |
-| Pytket-Service              | <http://localhost:5015>               | [Link](https://github.com/UST-QuAntiL/pytket-service)     | [Link](https://hub.docker.com/r/planqk/pytket-service)                 |
-| Rigetti QVM                 | <http://localhost:5016>               | [Link](https://github.com/rigetti/qvm)                    | [Link](https://hub.docker.com/r/rigetti/qvm)                           |
-| Rigetti Quilc               | <http://localhost:5017>               | [Link](https://github.com/rigetti/quilc)                  | [Link](https://hub.docker.com/r/rigetti/quilc)                         |
-| QProv                       | <http://localhost:5020/qprov>         | [Link](https://github.com/UST-QuAntiL/qprov)              | [Link](https://hub.docker.com/r/planqk/qprov)                          |
-| QProv-Collector-IBM         | <http://localhost:5021>               | [Link](https://github.com/UST-QuAntiL/qprov)              | [Link](https://hub.docker.com/r/planqk/qprov-collector)                |
-| Latex-Renderer              | <http://localhost:5030>               | [Link](https://github.com/UST-QuAntiL/latex-renderer)     | [Link](https://hub.docker.com/repository/docker/planqk/latex-renderer) |
-| Redis                       | <http://localhost:5040>               | [Link](https://github.com/redis/redis)                    | [Link](https://hub.docker.com/_/redis)                                 |
-| Postgres-Multi DB           | <tcp://localhost:5060>                | [Link](https://github.com/lmm-git/docker-postgres-multi)  | [Link](https://hub.docker.com/r/lmmdock/postgres-multi)                |
-| Config-Server               | <http://localhost:2379>               | [Link](https://github.com/etcd-io/etcd)                   | [Link](https://quay.io/repository/coreos/etcd)                         |
-| Winery                      | <http://localhost:8080>               | [Link](https://github.com/eclipse/winery)                 | [Link](https://hub.docker.com/r/opentosca/winery)                      |
+| QuAntiL Component           | URL                                   | GitHub                                                     | Docker Hub                                                                                    |
+|:----------------------------|:--------------------------------------|:-----------------------------------------------------------|:----------------------------------------------------------------------------------------------|
+| QC-Atlas-UI                 | <http://localhost:80>                 | [Link](https://github.com/UST-QuAntiL/qc-atlas-ui)         | [Link](https://hub.docker.com/r/planqk/qc-atlas-ui)                                           |
+| QC-Atlas                    | <http://localhost:6626/atlas>         | [Link](https://github.com/UST-QuAntiL/qc-atlas)            | [Link](https://hub.docker.com/r/planqk/atlas)                                                 |
+| Pattern-Atlas-API           | <http://localhost:1977/patternatlas>  | [Link](https://github.com/PatternAtlas/pattern-atlas-api)  | [Link](https://hub.docker.com/r/patternatlas/pattern-atlas-api)                               |
+| Pattern-Atlas-UI            | <http://localhost:1978>               | [Link](https://github.com/PatternAtlas/pattern-atlas-ui)   | [Link](https://hub.docker.com/r/patternatlas/pattern-atlas-ui)                                |
+| NISQ-Analyzer               | <http://localhost:5010/nisq-analyzer> | [Link](https://github.com/UST-QuAntiL/nisq-analyzer)       | [Link](https://hub.docker.com/r/planqk/nisq-analyzer)                                         |
+| Quantum-Transpiler-Frontend | <http://localhost:5011>               | [Link](https://github.com/UST-QuAntiL/QuantumTranspiler)   | [Link](https://hub.docker.com/r/planqk/quantum-transpiler-frontend)                           |
+| Quantum-Transpiler-Backend  | <http://localhost:5012>               | [Link](https://github.com/UST-QuAntiL/QuantumTranspiler)   | [Link](https://hub.docker.com/r/planqk/quantum-transpiler-backend)                            |
+| Qiskit-Service              | <http://localhost:5013>               | [Link](https://github.com/UST-QuAntiL/qiskit-service)      | [Link](https://hub.docker.com/r/planqk/qiskit-service)                                        |
+| Forest-Service              | <http://localhost:5014>               | [Link](https://github.com/UST-QuAntiL/forest-service)      | [Link](https://hub.docker.com/r/planqk/forest-service)                                        |
+| Pytket-Service              | <http://localhost:5015>               | [Link](https://github.com/UST-QuAntiL/pytket-service)      | [Link](https://hub.docker.com/r/planqk/pytket-service)                                        |
+| Rigetti QVM                 | <http://localhost:5016>               | [Link](https://github.com/rigetti/qvm)                     | [Link](https://hub.docker.com/r/rigetti/qvm)                                                  |
+| Rigetti Quilc               | <http://localhost:5017>               | [Link](https://github.com/rigetti/quilc)                   | [Link](https://hub.docker.com/r/rigetti/quilc)                                                |
+| QProv                       | <http://localhost:5020/qprov>         | [Link](https://github.com/UST-QuAntiL/qprov)               | [Link](https://hub.docker.com/r/planqk/qprov)                                                 |
+| QProv-Collector-IBM         | <http://localhost:5021>               | [Link](https://github.com/UST-QuAntiL/qprov)               | [Link](https://hub.docker.com/r/planqk/qprov-collector)                                       |
+| Latex-Renderer              | <http://localhost:5030>               | [Link](https://github.com/UST-QuAntiL/latex-renderer)      | [Link](https://hub.docker.com/repository/docker/planqk/latex-renderer)                        |
+| Redis                       | <http://localhost:5040>               | [Link](https://github.com/redis/redis)                     | [Link](https://hub.docker.com/_/redis)                                                        |
+| Postgres-Multi DB           | <tcp://localhost:5060>                | [Link](https://github.com/lmm-git/docker-postgres-multi)   | [Link](https://hub.docker.com/r/lmmdock/postgres-multi)                                       |
+| Config-Server               | <http://localhost:2379>               | [Link](https://github.com/etcd-io/etcd)                    | [Link](https://quay.io/repository/coreos/etcd)                                                |
+| Winery                      | <http://localhost:8080>               | [Link](https://github.com/eclipse/winery)                  | [Link](https://hub.docker.com/r/opentosca/winery)                                             |
 | QHAna Plugin Runner         |<http://localhost:5005>                | [Link](https://github.com/UST-QuAntiL/qhana-plugin-runner) | [Link](https://github.com/UST-QuAntiL/qhana-plugin-runner/pkgs/container/qhana-plugin-runner) |
-| Gateway                     |<http://localhost:6473>                | [Link](https://github.com/UST-QuAntiL/Gateway)            | [Link](https://hub.docker.com/repository/docker/planqk/gateway)        |
+| PlanQK Library              |<http://localhost:2903>                | [Link](https://github.com/UST-QuAntiL/PlanQK-Library)      | [Link](https://hub.docker.com/repository/docker/planqk/planqk-library)                        |
+| Gateway                     |<http://localhost:6473>                | [Link](https://github.com/UST-QuAntiL/Gateway)             | [Link](https://hub.docker.com/repository/docker/planqk/gateway)                               |
 
 **Make sure following ports in your environment are free in order to start the QuAntiL environment properly:**
 
 * `80`
 * `1977`
 * `1978`
+* `2903`
 * `2379`
 * `5005`
 * `5010`-`5017`
