@@ -14,6 +14,7 @@ The defined feature sets are namely:
 - `patternAtlas`
 - `qprov`
 - `winery`
+- `QHana`
 
 A detailed documentation can be found [here](https://quantil.readthedocs.io/en/latest/).  
 
@@ -67,12 +68,17 @@ For running the feature set `winery`, the setup needs additional configuration:
 | QProv-Collector-IBM         | <http://localhost:5021>               | [Link](https://github.com/UST-QuAntiL/qprov)               | [Link](https://hub.docker.com/r/planqk/qprov-collector)                                       |
 | Latex-Renderer              | <http://localhost:5030>               | [Link](https://github.com/UST-QuAntiL/latex-renderer)      | [Link](https://hub.docker.com/repository/docker/planqk/latex-renderer)                        |
 | Redis                       | <http://localhost:5040>               | [Link](https://github.com/redis/redis)                     | [Link](https://hub.docker.com/_/redis)                                                        |
+| Redis (QHana)               | <http://localhost:6379>               | [Link](https://github.com/redis/redis)                     | [Link](https://hub.docker.com/_/redis)                                                        |
 | Postgres-Multi DB           | <tcp://localhost:5060>                | [Link](https://github.com/lmm-git/docker-postgres-multi)   | [Link](https://hub.docker.com/r/lmmdock/postgres-multi)                                       |
 | Config-Server               | <http://localhost:2379>               | [Link](https://github.com/etcd-io/etcd)                    | [Link](https://quay.io/repository/coreos/etcd)                                                |
 | Winery                      | <http://localhost:8080>               | [Link](https://github.com/eclipse/winery)                  | [Link](https://hub.docker.com/r/opentosca/winery)                                             |
-| QHAna Plugin Runner         |<http://localhost:5005>                | [Link](https://github.com/UST-QuAntiL/qhana-plugin-runner) | [Link](https://github.com/UST-QuAntiL/qhana-plugin-runner/pkgs/container/qhana-plugin-runner) |
+| QHAna Plugin Runner (Prio)  |<http://localhost:5005>                | [Link](https://github.com/UST-QuAntiL/qhana-plugin-runner) | [Link](https://github.com/UST-QuAntiL/qhana-plugin-runner/pkgs/container/qhana-plugin-runner) |
+| QHAna Plugin Runner         |<http://localhost:5006>                | [Link](https://github.com/UST-QuAntiL/qhana-plugin-runner) | [Link](https://github.com/UST-QuAntiL/qhana-plugin-runner/pkgs/container/qhana-plugin-runner) |
 | PlanQK Library              |<http://localhost:2903>                | [Link](https://github.com/UST-QuAntiL/PlanQK-Library)      | [Link](https://hub.docker.com/repository/docker/planqk/planqk-library)                        |
 | Gateway                     |<http://localhost:6473>                | [Link](https://github.com/UST-QuAntiL/Gateway)             | [Link](https://hub.docker.com/repository/docker/planqk/gateway)                               |
+| QHana-UI                    | <http://localhost:4200>               | [Link](https://github.com/UST-QuAntiL/qhana-ui)       | [Link](https://github.com/UST-QuAntiL/qhana-plugin-runner/pkgs/container/qhana-ui)|
+| NISQ-Analyzer-UI            | <http://localhost:4201>               | [Link](https://github.com/UST-QuAntiL/nisq-analyzer-ui)       | [Link](https://github.com/UST-QuAntiL/qhana-ui/pkgs/container/qhana-ui)|
+| QHana-Backend               | <http://localhost:9090>               | [Link](https://github.com/UST-QuAntiL/qhana-backend)       | [Link](https://github.com/UST-QuAntiL/qhana-backend/pkgs/container/qhana-backend)|
 
 **Make sure following ports in your environment are free in order to start the QuAntiL environment properly:**
 
@@ -81,15 +87,20 @@ For running the feature set `winery`, the setup needs additional configuration:
 * `1978`
 * `2903`
 * `2379`
+* `4200`
+* `4201`
 * `5005`
+* `5006`
 * `5010`-`5017`
 * `5020`-`5021`
 * `5030`
 * `5040`
 * `5060`
+* `6379`
 * `6473`
 * `6626`
 * `8080`
+* `9090`
 
 ### Tips and Tricks
 
