@@ -351,18 +351,14 @@ services:
 
   # QHana containers
   qhana-ui:
-    # image: ghcr.io/ust-quantil/qhana-ui:main
-    image: qhana-ui-local # TODO: use online image
-    build: ../qhana-docker-dev/qhana-ui
+    image: ghcr.io/ust-quantil/qhana-ui:main
     profiles: ["all", "QHana"]
     ports:
       - "4200:8080"
     networks:
       - default
   qhana-plugin-runner:
-    # image: ghcr.io/ust-quantil/qhana-plugin-runner:main
-    image: qhana-plugin-runner-local # TODO: use online image
-    build: ../qhana-docker-dev/qhana-plugin-runner
+    image: ghcr.io/ust-quantil/qhana-plugin-runner:main
     profiles: ["all", "QHana"]
     depends_on:
       - qhana-redis
@@ -376,15 +372,13 @@ services:
       BROKER_URL: redis://qhana-redis:6379
       RESULT_BACKEND: redis://qhana-redis:6379
       SQLALCHEMY_DATABASE_URI: "postgresql+psycopg2://qhana:qhana@db:5060/qhana"
-      GIT_PLUGINS: "git+https://github.com/UST-QuAntiL/qhana-plugin-runner.git@nisq_analyzer_plugin#subdirectory=/plugins" # switch branch back to main
+      GIT_PLUGINS: "git+https://github.com/UST-QuAntiL/qhana-plugin-runner.git@main#subdirectory=/plugins"
       URL_MAP: '{"(https?://)(localhost|host.docker.internal):9090": "\\1qhana-backend:9090"}'
-      # NISQ_ANALYZER_UI_URL: http://localhost:4201
+      NISQ_ANALYZER_UI_URL: http://localhost:4201
     networks:
       - default
   qhana-worker:
-    # image: ghcr.io/ust-quantil/qhana-plugin-runner:main
-    image: qhana-plugin-runner-local # TODO: use online image
-    build: ../qhana-docker-dev/qhana-plugin-runner
+    image: ghcr.io/ust-quantil/qhana-plugin-runner:main
     profiles: ["all", "QHana"]
     depends_on:
       - qhana-plugin-runner
@@ -401,9 +395,7 @@ services:
     networks:
       - default
   qhana-backend:
-    # image: ghcr.io/ust-quantil/qhana-backend:main
-    image: qhana-backend-local # TODO: use online image
-    build: ../qhana-docker-dev/qhana-backend
+    image: ghcr.io/ust-quantil/qhana-backend:main
     profiles: ["all", "QHana"]
     volumes:
       - experiments:/app/data
@@ -431,9 +423,7 @@ services:
       - default
 
   nisq-analyzer-ui:
-    # image: planqk/nisq-analyzer-ui:latest
-    image: nisq-analyzer-ui # TODO: use online image
-    build: ../qhana-docker-dev/nisq-analyzer-ui
+    image: planqk/nisq-analyzer-ui:latest
     profiles: ["all", "QHana"]
     environment:
       NISQ_ANALYZER_HOST_NAME: localhost
