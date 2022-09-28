@@ -14,7 +14,7 @@ The defined feature sets are namely:
 - `patternAtlas`
 - `qprov`
 - `winery`
-- `QHana`
+- `qhana`
 
 A detailed documentation can be found [here](https://quantil.readthedocs.io/en/latest/).  
 
@@ -56,6 +56,7 @@ For running the feature set `winery`, the setup needs additional configuration:
 | QC-Atlas                    | <http://localhost:6626/atlas>         | [Link](https://github.com/UST-QuAntiL/qc-atlas)            | [Link](https://hub.docker.com/r/planqk/atlas)                                                 |
 | Pattern-Atlas-API           | <http://localhost:1977/patternatlas>  | [Link](https://github.com/PatternAtlas/pattern-atlas-api)  | [Link](https://hub.docker.com/r/patternatlas/pattern-atlas-api)                               |
 | Pattern-Atlas-UI            | <http://localhost:1978>               | [Link](https://github.com/PatternAtlas/pattern-atlas-ui)   | [Link](https://hub.docker.com/r/patternatlas/pattern-atlas-ui)                                |
+| NISQ-Analyzer-UI            | <http://localhost:5009>               | [Link](https://github.com/UST-QuAntiL/nisq-analyzer-ui)       | [Link](https://github.com/UST-QuAntiL/qhana-ui/pkgs/container/qhana-ui)|
 | NISQ-Analyzer               | <http://localhost:5010/nisq-analyzer> | [Link](https://github.com/UST-QuAntiL/nisq-analyzer)       | [Link](https://hub.docker.com/r/planqk/nisq-analyzer)                                         |
 | Quantum-Transpiler-Frontend | <http://localhost:5011>               | [Link](https://github.com/UST-QuAntiL/QuantumTranspiler)   | [Link](https://hub.docker.com/r/planqk/quantum-transpiler-frontend)                           |
 | Quantum-Transpiler-Backend  | <http://localhost:5012>               | [Link](https://github.com/UST-QuAntiL/QuantumTranspiler)   | [Link](https://hub.docker.com/r/planqk/quantum-transpiler-backend)                            |
@@ -72,13 +73,12 @@ For running the feature set `winery`, the setup needs additional configuration:
 | Postgres-Multi DB           | <tcp://localhost:5060>                | [Link](https://github.com/lmm-git/docker-postgres-multi)   | [Link](https://hub.docker.com/r/lmmdock/postgres-multi)                                       |
 | Config-Server               | <http://localhost:2379>               | [Link](https://github.com/etcd-io/etcd)                    | [Link](https://quay.io/repository/coreos/etcd)                                                |
 | Winery                      | <http://localhost:8080>               | [Link](https://github.com/eclipse/winery)                  | [Link](https://hub.docker.com/r/opentosca/winery)                                             |
+| QHana-UI                    | <http://localhost:5003>               | [Link](https://github.com/UST-QuAntiL/qhana-ui)       | [Link](https://github.com/UST-QuAntiL/qhana-plugin-runner/pkgs/container/qhana-ui)|
+| QHana-Backend               | <http://localhost:5004>               | [Link](https://github.com/UST-QuAntiL/qhana-backend)       | [Link](https://github.com/UST-QuAntiL/qhana-backend/pkgs/container/qhana-backend)|
 | QHAna Plugin Runner (Prio)  |<http://localhost:5005>                | [Link](https://github.com/UST-QuAntiL/qhana-plugin-runner) | [Link](https://github.com/UST-QuAntiL/qhana-plugin-runner/pkgs/container/qhana-plugin-runner) |
 | QHAna Plugin Runner         |<http://localhost:5006>                | [Link](https://github.com/UST-QuAntiL/qhana-plugin-runner) | [Link](https://github.com/UST-QuAntiL/qhana-plugin-runner/pkgs/container/qhana-plugin-runner) |
 | PlanQK Library              |<http://localhost:2903>                | [Link](https://github.com/UST-QuAntiL/PlanQK-Library)      | [Link](https://hub.docker.com/repository/docker/planqk/planqk-library)                        |
 | Gateway                     |<http://localhost:6473>                | [Link](https://github.com/UST-QuAntiL/Gateway)             | [Link](https://hub.docker.com/repository/docker/planqk/gateway)                               |
-| QHana-UI                    | <http://localhost:4200>               | [Link](https://github.com/UST-QuAntiL/qhana-ui)       | [Link](https://github.com/UST-QuAntiL/qhana-plugin-runner/pkgs/container/qhana-ui)|
-| NISQ-Analyzer-UI            | <http://localhost:4201>               | [Link](https://github.com/UST-QuAntiL/nisq-analyzer-ui)       | [Link](https://github.com/UST-QuAntiL/qhana-ui/pkgs/container/qhana-ui)|
-| QHana-Backend               | <http://localhost:9090>               | [Link](https://github.com/UST-QuAntiL/qhana-backend)       | [Link](https://github.com/UST-QuAntiL/qhana-backend/pkgs/container/qhana-backend)|
 
 **Make sure following ports in your environment are free in order to start the QuAntiL environment properly:**
 
@@ -87,11 +87,8 @@ For running the feature set `winery`, the setup needs additional configuration:
 * `1978`
 * `2903`
 * `2379`
-* `4200`
-* `4201`
-* `5005`
-* `5006`
-* `5010`-`5017`
+* `5003`-`5006`
+* `5009`-`5017`
 * `5020`-`5021`
 * `5030`
 * `5040`
@@ -100,7 +97,6 @@ For running the feature set `winery`, the setup needs additional configuration:
 * `6473`
 * `6626`
 * `8080`
-* `9090`
 
 ### Tips and Tricks
 

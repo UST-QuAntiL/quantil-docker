@@ -128,7 +128,7 @@ services:
       - "1978:80"
   nisq-analyzer:
     image: planqk/nisq-analyzer:latest
-    profiles: ["all", "nisqAnalyzer", "nisqAnalyzerCompilerComparison", "QHana"]
+    profiles: ["all", "nisqAnalyzer", "nisqAnalyzerCompilerComparison", "qhana"]
     environment:
       POSTGRES_HOSTNAME: db
       POSTGRES_PORT: 5060
@@ -152,10 +152,12 @@ services:
       PYTKET_HOSTNAME: pytket-service
       PYTKET_PORT: 5015
       # Configure Prioritization Service connection
-      PRIORITIZATION_HOSTNAME: qhana-plugin-runner-prio
+      PRIORITIZATION_HOSTNAME: qhana-plugin-runner
       PRIORITIZATION_PORT: 8080
     ports:
       - '5010:5010'
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     networks:
       - default
   # used by qc-atlas-ui to render latex
@@ -183,7 +185,7 @@ services:
   # used by nisq analyzer for execution and transpilation
   qiskit-service:
     image: planqk/qiskit-service:latest
-    profiles: ["all", "nisqAnalyzer", "nisqAnalyzerCompilerComparison", "qprov", "QHana"]
+    profiles: ["all", "nisqAnalyzer", "nisqAnalyzerCompilerComparison", "qprov", "qhana"]
     command: sh /app/startup.sh
     ports:
       - "5013:5013"
@@ -197,7 +199,7 @@ services:
 
   qiskit-rq-worker:
     image: planqk/qiskit-service:latest
-    profiles: ["all", "nisqAnalyzer", "nisqAnalyzerCompilerComparison", "qprov", "QHana"]
+    profiles: ["all", "nisqAnalyzer", "nisqAnalyzerCompilerComparison", "qprov", "qhana"]
     command: rq worker --url redis://redis:5040 qiskit-service_execute
     environment:
       - REDIS_URL=redis://redis:5040
@@ -297,7 +299,7 @@ services:
   # redis server for qiskit service
   redis:
     image: redis:6.2.2
-    profiles: ["all", "nisqAnalyzer", "nisqAnalyzerCompilerComparison", "qprov", "QHana"]
+    profiles: ["all", "nisqAnalyzer", "nisqAnalyzerCompilerComparison", "qprov", "qhana"]
     ports:
       - "5040:5040"
     command: --port 5040
@@ -349,95 +351,53 @@ services:
     networks:
       - default
 
+  nisq-analyzer-ui:
+    image: planqk/nisq-analyzer-ui:latest
+    profiles: ["all", "qhana"]
+    environment:
+      NISQ_ANALYZER_HOST_NAME: localhost
+      NISQ_ANALYZER_PORT: 5010
+    ports:
+      - '5009:80'
+    networks:
+      - default
+
   # QHana containers
   qhana-ui:
     image: ghcr.io/ust-quantil/qhana-ui:main
-    profiles: ["all", "QHana"]
+    profiles: ["all", "qhana"]
     ports:
-      - "4200:8080"
-    networks:
-      - default
-  qhana-plugin-runner:
-    image: ghcr.io/ust-quantil/qhana-plugin-runner:main
-    profiles: ["all", "QHana"]
-    depends_on:
-      - qhana-redis
-      - db
-    ports:
-      - "5006:8080"
-    volumes:
-      - instance:/app/instance
+      - "5003:8080"
     environment:
-      CONCURRENCY: 2
-      BROKER_URL: redis://qhana-redis:6379
-      RESULT_BACKEND: redis://qhana-redis:6379
-      SQLALCHEMY_DATABASE_URI: "postgresql+psycopg2://qhana:qhana@db:5060/qhana"
-      GIT_PLUGINS: "git+https://github.com/UST-QuAntiL/qhana-plugin-runner.git@main#subdirectory=/plugins"
-      URL_MAP: '{"(https?://)(localhost|host.docker.internal):9090": "\\1qhana-backend:9090"}'
-      NISQ_ANALYZER_UI_URL: http://localhost:4201
-    networks:
-      - default
-  qhana-worker:
-    image: ghcr.io/ust-quantil/qhana-plugin-runner:main
-    profiles: ["all", "QHana"]
-    depends_on:
-      - qhana-plugin-runner
-    volumes:
-      - instance:/app/instance
-    environment:
-      CONTAINER_MODE: worker
-      CONCURRENCY: 2
-      BROKER_URL: redis://qhana-redis:6379
-      RESULT_BACKEND: redis://qhana-redis:6379
-      SQLALCHEMY_DATABASE_URI: "postgresql+psycopg2://qhana:qhana@db:5060/qhana"
-      GIT_PLUGINS: "git+https://github.com/UST-QuAntiL/qhana-plugin-runner.git@nisq_analyzer_plugin#subdirectory=/plugins" # switch branch back to main
-      URL_MAP: '{"(https?://)(localhost|host.docker.internal):9090": "\\1qhana-backend:9090"}'
+      QHANA_BACKEND_PORT: 5004
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     networks:
       - default
   qhana-backend:
     image: ghcr.io/ust-quantil/qhana-backend:main
-    profiles: ["all", "QHana"]
+    profiles: ["all", "qhana"]
     volumes:
       - experiments:/app/data
     extra_hosts:
       - "host.docker.internal:host-gateway"
     environment:
-      QHANA_URL_MAPPING: '{"(?<=^|https?://)(localhost|host.docker.internal):5006": "qhana-plugin-runner:8080", "(?<=^|https?://)localhost(:[0-9]+)?": "host.docker.internal$$1"}'
-      QHANA_HOST: http://qhana-backend:9090
-      QHANA_PLUGIN_RUNNERS: '["http://localhost:5006"]'
+      QHANA_URL_MAPPING: '{"(?<=^|https?://)(localhost|host.docker.internal):5005": "qhana-plugin-runner:8080", "(?<=^|https?://)localhost(:[0-9]+)?": "host.docker.internal$$1"}'
+      QHANA_HOST: http://host.docker.internal:5004 # will break html view for visualization plugin, but localhost will break nisq-analyzer plugin
     ports:
-      - 9090:9090
-    networks:
-      - default
-  qhana-redis:
-    image: "redis:latest"
-    profiles: ["all", "QHana"]
-    ports:
-      - "6379:6379"
+      - 5004:9090
     networks:
       - default
   muse-db:
     image: ghcr.io/ust-quantil/mini-muse:main
-    profiles: ["all", "QHana"]
+    profiles: ["all", "qhana"]
     networks:
       - default
 
-  nisq-analyzer-ui:
-    image: planqk/nisq-analyzer-ui:latest
-    profiles: ["all", "QHana"]
-    environment:
-      NISQ_ANALYZER_HOST_NAME: localhost
-      NISQ_ANALYZER_PORT: 5010
-    ports:
-      - '4201:80'
-    networks:
-      - default
-
-  # Prio Service Containers
-  qhana-plugin-runner-prio:
+  qhana-plugin-runner:
     platform: linux/amd64
     image: ghcr.io/ust-quantil/qhana-plugin-runner:main
-    profiles: ["all", "nisqAnalyzerCompilerComparison", "QHana"]
+    profiles: ["all", "nisqAnalyzerCompilerComparison", "qhana"]
     depends_on:
       - redis
       - db
@@ -450,15 +410,19 @@ services:
       BROKER_URL: redis://redis:5040
       RESULT_BACKEND: redis://redis:5040
       SQLALCHEMY_DATABASE_URI: "postgresql+psycopg2://qhana:qhana@db:5060/qhana"
-      GIT_PLUGINS: "git+https://github.com/UST-QuAntiL/nisq-analyzer-prio-service.git@master#subdirectory=/plugins"
+      GIT_PLUGINS: "git+https://github.com/UST-QuAntiL/qhana-plugin-runner.git@update_package_versions#subdirectory=/plugins\ngit+https://github.com/UST-QuAntiL/nisq-analyzer-prio-service.git@update_scikit_learn#subdirectory=/plugins"
+        # TODO: set branches to main/master after merge
+      NISQ_ANALYZER_UI_URL: http://localhost:5009
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     networks:
       - default
-  qhana-worker-prio:
+  qhana-worker:
     platform: linux/amd64
     image: ghcr.io/ust-quantil/qhana-plugin-runner:main
-    profiles: ["all", "nisqAnalyzerCompilerComparison", "QHana"]
+    profiles: ["all", "nisqAnalyzerCompilerComparison", "qhana"]
     depends_on:
-      - qhana-plugin-runner-prio
+      - qhana-plugin-runner
     volumes:
       - instance:/app/instance
     environment:
@@ -467,7 +431,10 @@ services:
       BROKER_URL: redis://redis:5040
       RESULT_BACKEND: redis://redis:5040
       SQLALCHEMY_DATABASE_URI: "postgresql+psycopg2://qhana:qhana@db:5060/qhana"
-      GIT_PLUGINS: "git+https://github.com/UST-QuAntiL/nisq-analyzer-prio-service.git@master#subdirectory=/plugins"
+      GIT_PLUGINS: "git+https://github.com/UST-QuAntiL/qhana-plugin-runner.git@update_package_versions#subdirectory=/plugins\ngit+https://github.com/UST-QuAntiL/nisq-analyzer-prio-service.git@update_scikit_learn#subdirectory=/plugins"
+        # TODO: set branches to main/master after merge
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     networks:
       - default
 networks:
