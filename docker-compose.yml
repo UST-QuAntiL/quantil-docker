@@ -410,6 +410,7 @@ services:
       CONCURRENCY: 2
       BROKER_URL: redis://redis:5040
       RESULT_BACKEND: redis://redis:5040
+      CELERY_QUEUE: "qhana_queue1"
       SQLALCHEMY_DATABASE_URI: "postgresql+psycopg2://qhana:qhana@db:5060/qhana"
       GIT_PLUGINS: "git+https://github.com/UST-QuAntiL/qhana-plugin-runner.git@main#subdirectory=/plugins\ngit+https://github.com/UST-QuAntiL/nisq-analyzer-prio-service.git@master#subdirectory=/plugins"
       NISQ_ANALYZER_UI_URL: http://localhost:5009
@@ -430,6 +431,7 @@ services:
       CONCURRENCY: 2
       BROKER_URL: redis://redis:5040
       RESULT_BACKEND: redis://redis:5040
+      CELERY_QUEUE: "qhana_queue1"
       SQLALCHEMY_DATABASE_URI: "postgresql+psycopg2://qhana:qhana@db:5060/qhana"
       GIT_PLUGINS: "git+https://github.com/UST-QuAntiL/qhana-plugin-runner.git@main#subdirectory=/plugins\ngit+https://github.com/UST-QuAntiL/nisq-analyzer-prio-service.git@master#subdirectory=/plugins"
     extra_hosts:
