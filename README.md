@@ -114,6 +114,11 @@ docker-compose logs -f [--tail=1 <SERVICE_NAME>...]
 docker-compose logs -f qc-atlas db
 ```
 
+### Setup IBMQ Token for QProv
+
+QProv requires you IBMQ Token to collect provenance data from IBM's QPUs.
+To provide your token add it to the `_docker-compose.override.yml` at `services/qprov-collector-ibm/environment/QPROV_IBMQ_TOKEN`.
+
 ### Import Example Data
 
 See [QuAntil documentation](https://ust-quantil.github.io/quantil-docs/developer-guide/docker/)

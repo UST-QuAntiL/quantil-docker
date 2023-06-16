@@ -16,7 +16,7 @@ services:
 
   qprov-collector-ibm:
     environment:
-      QPROV_IBMQ_TOKEN: ''
+      QPROV_IBMQ_TOKEN: '<Place your token here>'
 
 secrets:
   ssh_secret:
