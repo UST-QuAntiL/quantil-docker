@@ -26,7 +26,7 @@ RUN apt-get update -qq && apt-get install -qqy \
 COPY clone-data-repo.sh clone-data-repo.sh
 COPY setup-atlas.sh setup-atlas.sh
 COPY setup-nisq.sh setup-nisq.sh
-COPY setup-patternatlas.sh setup-patternatlas.sh
+# COPY setup-patternatlas.sh setup-patternatlas.sh patternatlas does that itself
 
 EXPOSE 5060
 
