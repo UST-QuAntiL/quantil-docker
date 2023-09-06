@@ -105,6 +105,7 @@ services:
       - default
   pattern-atlas-ui:
     image: patternatlas/pattern-atlas-ui:latest
+    platform: linux/amd64
     depends_on:
       - config-server
     environment:
