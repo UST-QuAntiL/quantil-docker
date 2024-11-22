@@ -7,7 +7,6 @@ services:
   db:
     build:
       context: ./db
-    image: quantil-db
     environment:
       # specifies user:pw for each container
       POSTGRES_USERS: 'planqk:planqk|nisq:nisq|patternatlas:patternatlas|qprov:qprov'
