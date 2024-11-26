@@ -1,4 +1,4 @@
-FROM lmmdock/postgres-multi:latest
+FROM ghcr.io/philwun/docker-postgres-multi:master
 
 LABEL MAINTAINER Manuela Weigold <manuela.weigold@iaas.uni-stuttgart.de>
 
@@ -8,7 +8,7 @@ ENV QC_ATLAS_CONTENT_REPOSITORY_BRANCH "master"
 ENV QC_ATLAS_SUBFOLDER_CONTENT_BACKUP_FILES "example-data/SQL/backup-files"
 ENV NISQ_CONTENT_REPOSITORY_URL "git@github.com:UST-QuAntiL/nisq-analyzer-content.git"
 ENV NISQ_CONTENT_REPOSITORY_PATH "/var/nisq/testdata"
-ENV NISQ_CONTENT_REPOSITORY_BRANCH "v1.1.0"
+ENV NISQ_CONTENT_REPOSITORY_BRANCH "master"
 ENV NISQ_SUBFOLDER_CONTENT_BACKUP_FILES "example-data/SQL/backup-files"
 ENV PATTERNATLAS_CONTENT_REPOSITORY_URL "https://github.com/PatternAtlas/pattern-atlas-content.git"
 ENV PATTERNATLAS_CONTENT_REPOSITORY_PATH "/var/patternatlas/testdata"
