@@ -17,6 +17,7 @@ services:
       NISQ_DB: nisq
       PATTERNATLAS_DB: patternatlas
       QPROV_DB: qprov
+      PATTERNATLAS_CONTENT_REPOSITORY_BRANCH: none
     #volumes:
       # use this volume to save the postgres data
       # - ./postgres-data:/var/lib/postgresql/data
@@ -25,7 +26,7 @@ services:
     networks:
       - default
   qc-atlas-ui:
-    image: planqk/qc-atlas-ui:v3.2.0
+    image: planqk/qc-atlas-ui:latest
     depends_on:
       - config-server
     environment:
@@ -51,7 +52,7 @@ services:
     networks:
       - default
   qc-atlas:
-    image: planqk/atlas:v3.1.1
+    image: planqk/atlas:latest
     environment:
       POSTGRES_HOSTNAME: db
       POSTGRES_PORT: 5060
@@ -63,23 +64,28 @@ services:
     networks:
       - default
   pattern-atlas-api:
-    image: patternatlas/pattern-atlas-api:v1.6.1
+    image: patternatlas/pattern-atlas-api:latest
     profiles: ["all", "patternAtlas"]
     environment:
       JDBC_DATABASE_URL: db
       JDBC_DATABASE_NAME: patternatlas
       JDBC_DATABASE_USERNAME: patternatlas
+      DB_INIT_USER: patternatlas
       JDBC_DATABASE_PASSWORD: patternatlas
+      DB_INIT_PASSWORD: patternatlas
       JDBC_DATABASE_PORT: 5060
       LATEX_RENDERER_HOST_NAME: latex-renderer
       LATEX_RENDERER_PORT: 5030
       API_PORT: 1977
+      PATTERN_ATLAS_FETCH_INITIAL_DATA: true
+      PATTERN_ATLAS_CONTENT_REPOSITORY_BRANCH: main
     ports:
       - '1977:1977'
     networks:
       - default
   pattern-atlas-ui:
-    image: patternatlas/pattern-atlas-ui:v1.4.1
+    image: patternatlas/pattern-atlas-ui:latest
+    platform: linux/amd64
     profiles: [ "all", "patternAtlas" ]
     depends_on:
       - config-server
@@ -94,7 +100,7 @@ services:
     ports:
       - "1978:80"
   nisq-analyzer:
-    image: planqk/nisq-analyzer:v1.4.0
+    image: planqk/nisq-analyzer:latest
     profiles: ["all", "nisqAnalyzer", "nisqAnalyzerCompilerComparison"]
     environment:
       POSTGRES_HOSTNAME: db
@@ -147,7 +153,7 @@ services:
 
   # used by nisq analyzer for execution and transpilation
   qiskit-service:
-    image: planqk/qiskit-service:v1.4.0
+    image: qiskit-service
     profiles: ["all", "nisqAnalyzer", "nisqAnalyzerCompilerComparison", "qprov"]
     command: sh /app/startup.sh
     ports:
@@ -161,7 +167,7 @@ services:
       - default
 
   qiskit-rq-worker:
-    image: planqk/qiskit-service:v1.4.0
+    image: qiskit-service
     profiles: ["all", "nisqAnalyzer", "nisqAnalyzerCompilerComparison", "qprov"]
     command: rq worker --url redis://redis:5040 qiskit-service_execute
     environment:
@@ -175,7 +181,7 @@ services:
       replicas: 1
 
   forest-service:
-    image: planqk/forest-service:v1.2.0
+    image: planqk/forest-service:latest
     profiles: ["all", "nisqAnalyzerCompilerComparison"]
     command: sh /app/startup.sh
     ports:
@@ -193,7 +199,7 @@ services:
       - default
 
   forest-rq-worker:
-    image: planqk/forest-service:v1.2.0
+    image: planqk/forest-service:latest
     profiles: ["all", "nisqAnalyzerCompilerComparison"]
     command: rq worker --url redis://redis:5040 forest-service_execute
     environment:
@@ -211,7 +217,7 @@ services:
       - default
 
   pytket-service:
-    image: planqk/pytket-service:v1.2.0
+    image: planqk/pytket-service:latest
     profiles: ["all", "nisqAnalyzerCompilerComparison"]
     command: sh /app/startup.sh
     ports:
@@ -227,7 +233,7 @@ services:
       - default
 
   pytket-rq-worker:
-    image: planqk/pytket-service:v1.2.0
+    image: planqk/pytket-service:latest
     profiles: ["all", "nisqAnalyzerCompilerComparison"]
     command: rq worker --url redis://redis:5040 pytket-service_execute
     environment:
@@ -269,7 +275,7 @@ services:
     networks:
       - default
   qprov:
-    image: planqk/qprov:v1.2.0
+    image: planqk/qprov:latest
     profiles: ["all", "nisqAnalyzer", "nisqAnalyzerCompilerComparison", "qprov"]
     environment:
       POSTGRES_HOSTNAME: db
@@ -282,7 +288,7 @@ services:
     networks:
       - default
   qprov-collector-ibm:
-    image: planqk/qprov-collector:v1.2.0
+    image: planqk/qprov-collector:latest
     profiles: ["all", "nisqAnalyzer", "nisqAnalyzerCompilerComparison", "qprov"]
     environment:
       POSTGRES_HOSTNAME: db
@@ -294,7 +300,7 @@ services:
       QPROV_IBMQ_EXECUTE_CIRCUITS: 'false'
       QPROV_IBMQ_AUTO_COLLECT: 'true'
       QPROV_IBMQ_AUTO_COLLECT_INTERVAL: 60
-      QPROV_IBMQ_AUTO_COLLECT_INTERVAL_CIRCUITS: 180
+      QPROV_IBMQ_AUTO_COLLECT_INTERVAL_CIRCUITS: 10000000
       QISKIT_SERVICE_HOSTNAME: qiskit-service
       QISKIT_SERVICE_PORT: 5013
     ports:
