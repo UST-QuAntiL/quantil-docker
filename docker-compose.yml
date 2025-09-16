@@ -29,7 +29,7 @@ services:
     networks:
       - default
   qc-atlas-ui:
-    image: planqk/qc-atlas-ui:latest
+    image: qc-atlas-ui
     depends_on:
       - config-server
     environment:
@@ -103,7 +103,7 @@ services:
     ports:
       - "1978:80"
   nisq-analyzer:
-    image: nisq-analyzer
+    image: planqk/nisq-analyzer:latest
     profiles: ["all", "nisqAnalyzer", "nisqAnalyzerCompilerComparison"]
     environment:
       POSTGRES_HOSTNAME: db
@@ -281,7 +281,7 @@ services:
     networks:
       - default
   qprov:
-    image: planqk/qprov:latest
+    image: qprov
     profiles: ["all", "nisqAnalyzer", "nisqAnalyzerCompilerComparison", "qprov"]
     environment:
       POSTGRES_HOSTNAME: db
@@ -293,26 +293,27 @@ services:
       - "5020:5020"
     networks:
       - default
-  # qprov-collector-ibm:
-  #   image: planqk/qprov-collector:latest
-  #   profiles: ["all", "nisqAnalyzer", "nisqAnalyzerCompilerComparison", "qprov"]
-  #   environment:
-  #     POSTGRES_HOSTNAME: db
-  #     POSTGRES_PORT: 5060
-  #     POSTGRES_USER: qprov
-  #     POSTGRES_PASSWORD: qprov
-  #     POSTGRES_DB: qprov
-  #     QPROV_IBMQ_TOKEN: ''
-  #     QPROV_IBMQ_EXECUTE_CIRCUITS: 'false'
-  #     QPROV_IBMQ_AUTO_COLLECT: 'true'
-  #     QPROV_IBMQ_AUTO_COLLECT_INTERVAL: 60
-  #     QPROV_IBMQ_AUTO_COLLECT_INTERVAL_CIRCUITS: 180
-  #     QISKIT_SERVICE_HOSTNAME: qiskit-service
-  #     QISKIT_SERVICE_PORT: 5013
-  #   ports:
-  #     - "5021:5021"
-  #   networks:
-  #     - default
+  qprov-collector-ibm:
+    image: collector
+    profiles: ["all", "nisqAnalyzer", "nisqAnalyzerCompilerComparison", "qprov"]
+    environment:
+      POSTGRES_HOSTNAME: db
+      POSTGRES_PORT: 5060
+      POSTGRES_USER: qprov
+      POSTGRES_PASSWORD: qprov
+      POSTGRES_DB: qprov
+      QPROV_IBM_CLOUD_APIKEY: ""
+      QPROV_IBM_QUANTUM_SERVICE_CRN: ""
+      QPROV_IBMQ_EXECUTE_CIRCUITS: 'false'
+      QPROV_IBMQ_AUTO_COLLECT: 'true'
+      QPROV_IBMQ_AUTO_COLLECT_INTERVAL: 60
+      QPROV_IBMQ_AUTO_COLLECT_INTERVAL_CIRCUITS: 180
+      # QISKIT_SERVICE_HOSTNAME: qiskit-service
+      # QISKIT_SERVICE_PORT: 5013
+    ports:
+      - "5021:5021"
+    networks:
+      - default
   config-server:
     image: bitnami/etcd:3.5.7
     environment:
@@ -332,7 +333,7 @@ services:
   qhana-plugin-runner:
     platform: linux/amd64
     image: ghcr.io/ust-quantil/qhana-plugin-runner:main
-    profiles: ["all", "nisqAnalyzerCompilerComparison", "qhana"]
+    profiles: ["all", "nisqAnalyzer", "qhana"]
     depends_on:
       - redis
       - db
@@ -345,7 +346,7 @@ services:
       BROKER_URL: redis://redis:5040
       RESULT_BACKEND: redis://redis:5040
       SQLALCHEMY_DATABASE_URI: "postgresql+psycopg2://qhana:qhana@db:5060/qhana"
-      GIT_PLUGINS: "git+https://github.com/UST-QuAntiL/qhana-plugin-runner.git@main#subdirectory=/stable_plugins\ngit+https://github.com/UST-QuAntiL/nisq-analyzer-prio-service.git@master#subdirectory=/plugins"
+      GIT_PLUGINS: "git+https://github.com/UST-QuAntiL/qhana-plugin-runner.git@main#subdirectory=/stable_plugins\ngit+https://github.com/UST-QuAntiL/nisq-analyzer-prio-service.git@fix/update-dependencies#subdirectory=/plugins"
       PLUGIN_FOLDERS: ./git-plugins:./git-plugins/infrastructure
       WAIT_HOSTS: redis:5040, db:5060
       WAIT_SLEEP_INTERVAL: 5
@@ -358,7 +359,7 @@ services:
   qhana-worker:
     platform: linux/amd64
     image: ghcr.io/ust-quantil/qhana-plugin-runner:main
-    profiles: ["all", "nisqAnalyzerCompilerComparison", "qhana"]
+    profiles: ["all", "nisqAnalyzer", "qhana"]
     depends_on:
       - qhana-plugin-runner
     volumes:
@@ -369,7 +370,7 @@ services:
       BROKER_URL: redis://redis:5040
       RESULT_BACKEND: redis://redis:5040
       SQLALCHEMY_DATABASE_URI: "postgresql+psycopg2://qhana:qhana@db:5060/qhana"
-      GIT_PLUGINS: "git+https://github.com/UST-QuAntiL/qhana-plugin-runner.git@main#subdirectory=/stable_plugins\ngit+https://github.com/UST-QuAntiL/nisq-analyzer-prio-service.git@master#subdirectory=/plugins"
+      GIT_PLUGINS: "git+https://github.com/UST-QuAntiL/qhana-plugin-runner.git@main#subdirectory=/stable_plugins\ngit+https://github.com/UST-QuAntiL/nisq-analyzer-prio-service.git@fix/update-dependencies#subdirectory=/plugins"
       PLUGIN_FOLDERS: ./git-plugins:./git-plugins/infrastructure
       WAIT_HOSTS: redis:5040, db:5060
       WAIT_SLEEP_INTERVAL: 5
@@ -380,14 +381,14 @@ services:
       LOCALHOST_PROXY_PORTS: *localhost-proxy-ports
   qhana-backend:
     image: ghcr.io/ust-quantil/qhana-backend:main
-    profiles: ["all", "nisqAnalyzerCompilerComparison", "qhana"]
+    profiles: ["all", "nisqAnalyzer", "qhana"]
     volumes:
       - experiments:/app/data
     ports:
       - 9090:9090
   minio:
     image: quay.io/minio/minio
-    profiles: ["all", "nisqAnalyzerCompilerComparison", "qhana"]
+    profiles: ["all", "nisqAnalyzer", "qhana"]
     command: server /data --console-address ":9001"
     volumes:
       - minio:/data
